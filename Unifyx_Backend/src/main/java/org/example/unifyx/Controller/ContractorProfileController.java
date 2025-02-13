@@ -2,6 +2,7 @@ package org.example.unifyx.Controller;
 
 import org.example.unifyx.Model.ContractorProfile;
 import org.example.unifyx.Repository.ContractorProfileRepository;
+import org.example.unifyx.Service.ContractorProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,18 +12,21 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/contractorprofiles")
+@RequestMapping("/api/contractorprofile")
 public class ContractorProfileController {
 
     @Autowired
     private ContractorProfileRepository contractorProfileRepository;
 
+    @Autowired
+    private ContractorProfileService contractorProfileService;
+
     // Create a new contractor profile
-    @PostMapping("/api/contractorprofiles")
+    @PostMapping
     public ResponseEntity<ContractorProfile> createContractorProfile(@RequestBody ContractorProfile contractorProfile) {
 
-        ContractorProfile savedProfile = contractorProfileRepository.save(contractorProfile);
-        return new ResponseEntity<>(savedProfile, HttpStatus.CREATED);
+         contractorProfileService.addContractorProfile(contractorProfile);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // Get all contractor profiles
