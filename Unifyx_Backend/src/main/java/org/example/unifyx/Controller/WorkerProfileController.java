@@ -2,6 +2,7 @@ package org.example.unifyx.Controller;
 
 import org.example.unifyx.Model.WorkerProfile;
 import org.example.unifyx.Repository.WorkerProfileRepository;
+import org.example.unifyx.Service.WorkerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,14 @@ public class WorkerProfileController {
     @Autowired
     private WorkerProfileRepository workerProfileRepository;
 
+    @Autowired
+    private WorkerProfileService workerProfileService;
+
     // Create a new worker profile
     @PostMapping
     public ResponseEntity<WorkerProfile> createWorkerProfile(@RequestBody WorkerProfile workerProfile) {
-        WorkerProfile savedProfile = workerProfileRepository.save(workerProfile);
-        return new ResponseEntity<>(savedProfile, HttpStatus.CREATED);
+        workerProfileService.addWorkerProfile(workerProfile);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // Get all worker profiles

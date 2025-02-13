@@ -2,6 +2,7 @@ package org.example.unifyx.Controller;
 
 import org.example.unifyx.Model.OwnerProfile;
 import org.example.unifyx.Repository.OwnerProfileRepository;
+import org.example.unifyx.Service.OwnerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,14 @@ public class OwnerProfileController {
     @Autowired
     private OwnerProfileRepository ownerProfileRepository;
 
+    @Autowired
+    private OwnerProfileService ownerProfileService;
+
     // Create a new owner profile
     @PostMapping
     public ResponseEntity<OwnerProfile> createOwnerProfile(@RequestBody OwnerProfile ownerProfile) {
-        OwnerProfile savedProfile = ownerProfileRepository.save(ownerProfile);
-        return new ResponseEntity<>(savedProfile, HttpStatus.CREATED);
+        ownerProfileService.addOwnerProfile(ownerProfile);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // Get all owner profiles
