@@ -13,11 +13,20 @@ public class WorkerProfile {
     private String name;
     private String email;
     private String phoneNo;
+    private String address;
 
     @OneToMany(mappedBy = "worker", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Portfolio> portfolios;
 
     // Getters and Setters
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public int getWorkerId() {
         return workerId;
