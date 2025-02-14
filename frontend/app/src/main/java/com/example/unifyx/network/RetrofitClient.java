@@ -1,19 +1,23 @@
 package com.example.unifyx.network;
 
+import com.google.gson.Gson;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static Retrofit retrofit;
-    private static final String BASE_URL = "http://10.0.2.2:8080/";  // Replace with your actual backend IP
+    private Retrofit retrofit;
+    public RetrofitClient(){
+        initializerRetrofit();
+    }
 
-    public static Retrofit getRetrofitInstance() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
+    private void initializerRetrofit(){
+        retrofit = new Retrofit.Builder()
+        .baseUrl("http://10.0.2.2:8080/").addConverterFactory(GsonConverterFactory.create(new Gson()))
+        .build();
+    }
+
+    public Retrofit getRetrofit(){
         return retrofit;
     }
 }
