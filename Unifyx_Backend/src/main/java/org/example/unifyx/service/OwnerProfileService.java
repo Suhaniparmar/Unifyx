@@ -1,8 +1,8 @@
-package org.example.unifyx.Service;
+package org.example.unifyx.service;
 
 
 import org.example.unifyx.Model.OwnerProfile;
-import org.example.unifyx.Repository.OwnerProfileRepository;
+import org.example.unifyx.repository.OwnerProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,9 @@ public class OwnerProfileService {
     private OwnerProfileRepository ownerProfileRepository;
 
 
-    public void addOwnerProfile(OwnerProfile ownerProfile) {
-        ownerProfileRepository.save(ownerProfile);
+    public OwnerProfile addOwnerProfile(OwnerProfile ownerProfile) {
+
+        System.out.println("Saving owner: " + ownerProfile);
+        return ownerProfileRepository.save(ownerProfile);
     }
 }
