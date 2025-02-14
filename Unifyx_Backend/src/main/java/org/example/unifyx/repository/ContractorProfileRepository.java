@@ -1,4 +1,4 @@
-package org.example.unifyx.Repository;
+package org.example.unifyx.repository;
 
 import org.example.unifyx.Model.ContractorProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
