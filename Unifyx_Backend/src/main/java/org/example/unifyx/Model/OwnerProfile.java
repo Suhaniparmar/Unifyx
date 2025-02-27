@@ -71,6 +71,7 @@ public class OwnerProfile {
         return posts;
     }
 
+
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }

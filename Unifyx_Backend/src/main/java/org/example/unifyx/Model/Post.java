@@ -1,9 +1,12 @@
 package org.example.unifyx.Model;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "posts")
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int postId;
@@ -16,93 +19,43 @@ public class Post {
     @JoinColumn(name = "contractor_id")
     private ContractorProfile contractor;
 
-    private String photo;
     private String description;
     private String workerCategory;
-    private String status;
     private String siteAddress;
     private String location;
     private String duration;
+    private String status;
 
-    public int getPostId() {
-        return postId;
-    }
+    @ElementCollection
+    @CollectionTable(name = "post_images", joinColumns = @JoinColumn(name = "post_id"))
+    @Column(name = "image_url")
+    private List<String> photos;  // List of Cloudinary URLs
 
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
+    // Getters & Setters
+    public int getPostId() { return postId; }
+    public void setPostId(int postId) { this.postId = postId; }
 
-    public OwnerProfile getOwner() {
-        return owner;
-    }
+    public OwnerProfile getOwner() { return owner; }
+    public void setOwner(OwnerProfile owner) { this.owner = owner; }
 
-    public void setOwner(OwnerProfile owner) {
-        this.owner = owner;
-    }
+    public ContractorProfile getContractor() { return contractor; }
+    public void setContractor(ContractorProfile contractor) { this.contractor = contractor; }
 
-    public ContractorProfile getContractor() {
-        return contractor;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setContractor(ContractorProfile contractor) {
-        this.contractor = contractor;
-    }
+    public String getWorkerCategory() { return workerCategory; }
+    public void setWorkerCategory(String workerCategory) { this.workerCategory = workerCategory; }
 
-    public String getPhoto() {
-        return photo;
-    }
+    public String getSiteAddress() { return siteAddress; }
+    public void setSiteAddress(String siteAddress) { this.siteAddress = siteAddress; }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDuration() { return duration; }
+    public void setDuration(String duration) { this.duration = duration; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getWorkerCategory() {
-        return workerCategory;
-    }
-
-    public void setWorkerCategory(String workerCategory) {
-        this.workerCategory = workerCategory;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getSiteAddress() {
-        return siteAddress;
-    }
-
-    public void setSiteAddress(String siteAddress) {
-        this.siteAddress = siteAddress;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-// Getters and Setters
+    public List<String> getPhotos() { return photos; }
+    public void setPhotos(List<String> photos) { this.photos = photos; }
 }
-

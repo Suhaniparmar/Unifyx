@@ -6,6 +6,7 @@ import org.example.unifyx.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -16,17 +17,20 @@ public class OwnerHomeController {
     @Autowired
     private PostService postService;
 
+    // Create a new post with Cloudinary image upload
     @PostMapping("/newpost")
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
-        Post savedPost = postService.createPost(post);
-        return ResponseEntity.ok(savedPost);
+    public ResponseEntity<String> createPost(
+            @RequestPart("post") Post post,
+            @RequestPart(value = "images", required = false) List<MultipartFile> images) {
+
+        postService.createPostWithImages(post, images);
+        return ResponseEntity.ok("Post created successfully!");
     }
 
-    @GetMapping("/posts/{ownerId}")
-    public ResponseEntity<List<Post>> getPostsByOwner(@PathVariable int ownerId) {
-        OwnerProfile owner = new OwnerProfile();
-        owner.setOwnerId(ownerId);  // Assuming OwnerProfile has setOwnerId method
-        List<Post> posts = postService.getPostsByOwner(owner);
-        return ResponseEntity.ok(posts);
-    }
+//    // Get all posts by a specific owner
+//    @GetMapping("/posts/{ownerId}")
+//    public ResponseEntity<List<Post>> getPostsByOwner(@PathVariable OwnerProfile ownerId) {
+//        List<Post> posts = postService.getPostsByOwner(ownerId);
+//        return ResponseEntity.ok(posts);
+//    }
 }

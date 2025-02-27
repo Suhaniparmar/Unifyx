@@ -1,96 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#F4EFE5"
     tools:context="com.example.unifyx.MainActivity">
 
-    <!-- Username Field -->
-    <EditText
-        android:id="@+id/name"
+    <!-- Navbar -->
+    <View
+        android:id="@+id/navbar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Full Name"
-        android:drawableStart="@drawable/ic_user"
-        android:padding="12dp"
-        android:background="@drawable/rounded_edittext"
-        android:layout_marginTop="120dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="75dp"
+        android:background="#B3E5BC6F"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8" />
-
-    <!-- Email Field -->
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:drawableStart="@drawable/email_icon"
-        android:padding="12dp"
-        android:background="@drawable/rounded_edittext"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Icon 1 -->
+
+    <!-- Icon 2 -->
+
+    <!-- CardView -->
+
+    <!-- TextView -->
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="328dp"
+        android:layout_marginEnd="17dp"
+        app:layout_constraintBottom_toBottomOf="@id/navbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8" />
-
-    <!-- Contact Number Field -->
-    <EditText
-        android:id="@+id/contact"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Contact Number"
-        android:drawableStart="@drawable/contact"
-        android:padding="12dp"
-        android:background="@drawable/rounded_edittext"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/email"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/navbar"
+        app:layout_constraintVertical_bias="0.64"
+        app:srcCompat="@drawable/profile_logo" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="273dp"
+        android:layout_marginEnd="72dp"
+        app:layout_constraintBottom_toBottomOf="@id/navbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8" />
-
-    <!-- Select Location Spinner -->
-    <Spinner
-        android:id="@+id/location_spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_edittext"
-        android:entries="@array/gujarat_cities"
-        app:layout_constraintTop_toBottomOf="@id/contact"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8" />
+        app:layout_constraintTop_toTopOf="@id/navbar"
+        app:layout_constraintVertical_bias="0.64"
+        app:srcCompat="@drawable/search_logo" />
 
-    <!-- Submit Button -->
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/orange"
-        android:padding="12dp"
-        android:text="Submit"
-        android:textColor="@color/white"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/location_spinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.6" />
 
-    <!-- Progress Bar -->
-    <ProgressBar
-        android:id="@+id/progress_bar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/submit_button"
+
+
+    <!--    <?xml version="1.0" encoding="utf-8"?>-->
+    <ImageView
+        android:id="@+id/menu"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Menu Icon"
+        app:layout_constraintBottom_toBottomOf="@id/navbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/navbar"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/menu_logo" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

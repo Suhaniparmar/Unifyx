@@ -69,8 +69,8 @@ public class contractor_info extends AppCompatActivity {
                 public void onResponse(Call<ContractorProfile> call, Response<ContractorProfile> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(contractor_info.this, "Data Submitted", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(contractor_info.this, owner_home.class);
-//                        startActivity(intent);
+                        Intent intent = new Intent(contractor_info.this, contractor_home.class);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(contractor_info.this, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                     }
