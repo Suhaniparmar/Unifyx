@@ -143,6 +143,8 @@ public class PostCreate extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         if (response.isSuccessful()) {
                             Toast.makeText(PostCreate.this, "Post uploaded successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(PostCreate.this, OwnerProfilePage.class);
+                            startActivity(intent);
                         } else {
                             Log.e(TAG, "Post upload failed: " + response.errorBody());
                             Toast.makeText(PostCreate.this, "Post upload failed", Toast.LENGTH_SHORT).show();
