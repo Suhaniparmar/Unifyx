@@ -10,12 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,16 +24,17 @@ public class signup extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     Button signup_btn;
-    EditText email_et,password_et,cpassword_et;
+    EditText email_et, password_et, cpassword_et;
     TextView login_txt;
 
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+        // Check if user is already signed in
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             Intent intent = new Intent(signup.this, choose_role.class);
+            intent.putExtra("uid", currentUser.getUid()); // Pass UID
             startActivity(intent);
             finish();
         }
@@ -47,60 +44,63 @@ public class signup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
-        signup_btn=(Button) findViewById(R.id.btn_submit);
-        email_et = (EditText) findViewById(R.id.et_email);
-        password_et = (EditText) findViewById(R.id.et_password);
-        cpassword_et = (EditText) findViewById(R.id.et_confirm_password);
-        login_txt = (TextView) findViewById(R.id.tv_log_in);
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+        signup_btn = findViewById(R.id.btn_submit);
+        email_et = findViewById(R.id.et_email);
+        password_et = findViewById(R.id.et_password);
+        cpassword_et = findViewById(R.id.et_confirm_password);
+        login_txt = findViewById(R.id.tv_log_in);
+        progressBar = findViewById(R.id.progress_bar);
 
         mAuth = FirebaseAuth.getInstance();
 
-        login_txt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(signup.this,login.class);
-                startActivity(intent);
-                finish();
-            }
+        login_txt.setOnClickListener(view -> {
+            Intent intent = new Intent(signup.this, login.class);
+            startActivity(intent);
+            finish();
         });
 
-        signup_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                String email, password;
-                email = String.valueOf(email_et.getText());
-                password = String.valueOf(password_et.getText());
-                if(TextUtils.isEmpty(email)){
-                    Toast.makeText(signup.this,"Enter email",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    Toast.makeText(signup.this,"Enter password",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(signup.this,"Account created",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(signup.this, login.class);
-                                    startActivity(intent);
+        signup_btn.setOnClickListener(view -> {
+            progressBar.setVisibility(View.VISIBLE);
+            String email = email_et.getText().toString().trim();
+            String password = password_et.getText().toString().trim();
+            String confirmPassword = cpassword_et.getText().toString().trim();
 
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    // Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(signup.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    //updateUI(null);
-                                }
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(signup.this, "Enter email", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                return;
+            }
+
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(signup.this, "Enter password", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                return;
+            }
+
+            if (!password.equals(confirmPassword)) {
+                Toast.makeText(signup.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                return;
+            }
+
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        progressBar.setVisibility(View.GONE);
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null) {
+                                Toast.makeText(signup.this, "Account created", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(signup.this, choose_role.class);
+                                intent.putExtra("uid", user.getUid());// Pass UID to choose_role
+                                intent.putExtra("email",user.getEmail());
+                                startActivity(intent);
+                                finish();
                             }
-                        });
-            }
+                        } else {
+                            Toast.makeText(signup.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
-
     }
 }

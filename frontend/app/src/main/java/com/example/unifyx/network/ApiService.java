@@ -10,10 +10,12 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 
 import com.example.unifyx.model.ContractorProfile;
 import com.example.unifyx.model.OwnerProfile;
 import com.example.unifyx.model.Post;
+import com.example.unifyx.model.Users;
 import com.example.unifyx.model.WorkerProfile;
 
 import java.util.List;
@@ -61,5 +63,14 @@ public interface ApiService {
             @Part List<MultipartBody.Part> images
     );
     // Sends Cloudinary image URLs only
+
+    @POST("/users")
+    Call<Void> createUser(@Body Users user);
+
+    @GET("/users/role/{uid}")
+    Call<Map<String, String>> getUserRole(@Path("uid") String uid);
+
+    
+    
 
 }
