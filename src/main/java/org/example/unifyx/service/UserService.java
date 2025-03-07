@@ -19,29 +19,39 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<Users> getUserById(Long id) {
-        return userRepository.findById(id);
+    public String getUserRoleById(String uid) {
+        return userRepository.findRoleByUid(uid);
     }
 
-    public Optional<Users> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+
+//    public Optional<Users> getUserByEmail(String email) {
+//        return userRepository.findByEmail(email);
+//    }
+
 
     public Users createUser(Users user) {
+        if (user.getEmail() == null || user.getEmail().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty");
+        }
         return userRepository.save(user);
     }
 
     @Transactional
-    public Users updateUser(Long id, Users userDetails) {
-        return userRepository.findById(id).map(user -> {
+    public Users updateUser(String uid, Users userDetails) {
+        return userRepository.findById(uid).map(user -> {
             user.setEmail(userDetails.getEmail());
-            user.setPassword(userDetails.getPassword());
             user.setRole(userDetails.getRole());
             return userRepository.save(user);
         }).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public void deleteUser(String uid) {
+        userRepository.deleteById(uid);
+    }
+
+
+    public Users getUserById(String uid) {
+        Optional<Users> user = userRepository.findById(uid);
+        return user.orElse(null);
     }
 }

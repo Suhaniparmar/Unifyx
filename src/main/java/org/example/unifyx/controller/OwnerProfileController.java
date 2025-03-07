@@ -21,6 +21,16 @@ public class OwnerProfileController {
         return new ResponseEntity<>(savedOwner, HttpStatus.CREATED);
     }
 
+    @GetMapping("/profile")
+    public ResponseEntity<OwnerProfile> getOwnerProfile(@RequestParam String email) {
+        OwnerProfile owner = ownerProfileService.getOwnerByEmail(email);
+        if(owner != null) {
+            return ResponseEntity.ok(owner);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
 
 
 }

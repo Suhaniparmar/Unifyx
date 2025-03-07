@@ -18,4 +18,9 @@ public class OwnerProfileService {
         System.out.println("Saving owner: " + ownerProfile);
         return ownerProfileRepository.save(ownerProfile);
     }
+
+    public OwnerProfile getOwnerByEmail(String email) {
+        return ownerProfileRepository.findByEmail(email);
+
+    }
 }
