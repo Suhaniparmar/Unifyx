@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.unifyx.contractor.contractor_home;
 import com.example.unifyx.network.ApiService;
 import com.example.unifyx.owner.owner_home;
-import com.example.unifyx.worker.worker_home;
+import com.example.unifyx.worker.WorkerHome;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.GsonBuilder;
@@ -90,7 +90,7 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent;
         switch (role) {
             case "worker":
-                intent = new Intent(SplashActivity.this, worker_home.class);
+                intent = new Intent(SplashActivity.this, WorkerHome.class);
                 break;
             case "contractor":
                 intent = new Intent(SplashActivity.this, contractor_home.class);

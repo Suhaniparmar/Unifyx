@@ -1,12 +1,17 @@
 package com.example.unifyx.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Post {
 
     private String postId; // Firestore document ID (if needed)
     private OwnerProfile owner;
+
     private ContractorProfile contractor;
+
+    @SerializedName("photos")
     private List<String> photo; // Changed to List<String>
     private String description;
     private String workerCategory;
@@ -21,6 +26,11 @@ public class Post {
 
     public Post(){
 
+    }
+
+    public Post(String description, String location) {
+        this.description = description;
+        this.location = location;
     }
 
     // Getters and Setters

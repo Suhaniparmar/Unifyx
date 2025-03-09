@@ -1,6 +1,7 @@
 package com.example.unifyx;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.unifyx.contractor.contractor_home;
 import com.example.unifyx.network.ApiService;
 import com.example.unifyx.owner.owner_home;
-import com.example.unifyx.worker.worker_home;
+import com.example.unifyx.worker.WorkerHome;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -153,11 +154,20 @@ public class login extends AppCompatActivity {
             return;
         }
 
+        // 🔹 Store the email in SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email", user.getEmail());
+        editor.putString("uid", user.getUid());// Store the email
+        editor.apply(); // Save the changes
+
+        Log.d(TAG, "Stored Email in SharedPreferences: " + user.getEmail());
+
         Log.d(TAG, "User Role: " + role + ", UID: " + user.getUid() + ", Email: " + user.getEmail());
 
         switch (role) {
             case "worker":
-                intent = new Intent(login.this, worker_home.class);
+                intent = new Intent(login.this, WorkerHome.class);
                 break;
             case "contractor":
                 intent = new Intent(login.this, contractor_home.class);
@@ -174,4 +184,5 @@ public class login extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }

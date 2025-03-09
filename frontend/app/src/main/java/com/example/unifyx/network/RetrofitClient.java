@@ -17,7 +17,7 @@ public class RetrofitClient {
         .build();
     }
 
-    public static Retrofit getRetrofit(){
+    public Retrofit getRetrofit(){
         return retrofit;
     }
 }

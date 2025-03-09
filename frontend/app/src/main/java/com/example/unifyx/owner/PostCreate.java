@@ -3,6 +3,7 @@ package com.example.unifyx.owner;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -47,13 +48,16 @@ public class PostCreate extends AppCompatActivity {
     private Button btnSelectImages, btnSubmit;
     private ProgressBar progressBar;
     private ApiService apiService;
+    private String uid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_create);
 
-        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+        RetrofitClient retrofitClient = new RetrofitClient();
+        apiService = retrofitClient.getRetrofit().create(ApiService.class);
 
         etDescription = findViewById(R.id.et_description);
         etWorkerCategory = findViewById(R.id.et_worker_category);
@@ -119,11 +123,15 @@ public class PostCreate extends AppCompatActivity {
     }
 
     private void createPostWithImages() {
+        SharedPreferences sharedPreferences2 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        this.uid = sharedPreferences2.getString("uid", null);
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), etDescription.getText().toString());
         RequestBody workerCategory = RequestBody.create(MediaType.parse("text/plain"), etWorkerCategory.getText().toString());
         RequestBody siteAddress = RequestBody.create(MediaType.parse("text/plain"), etSiteAddress.getText().toString());
         RequestBody siteLocation = RequestBody.create(MediaType.parse("text/plain"), etSiteLocation.getText().toString());
         RequestBody duration = RequestBody.create(MediaType.parse("text/plain"), etDuration.getText().toString());
+        RequestBody uid = RequestBody.create(MediaType.parse("text/plain"), this.uid); // Replace with actual owner UID
+
 
         List<MultipartBody.Part> imageParts = new ArrayList<>();
         for (Uri uri : imageUris) {
@@ -135,8 +143,9 @@ public class PostCreate extends AppCompatActivity {
                 imageParts.add(body);
             }
         }
+        Log.d(TAG, "Owner UID: " + this.uid);
 
-        apiService.createPost(description, workerCategory, siteAddress, siteLocation, duration, imageParts)
+        apiService.createPost(uid,description, workerCategory, siteAddress, siteLocation, duration, imageParts)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -146,7 +155,11 @@ public class PostCreate extends AppCompatActivity {
                             Intent intent = new Intent(PostCreate.this, OwnerProfilePage.class);
                             startActivity(intent);
                         } else {
-                            Log.e(TAG, "Post upload failed: " + response.errorBody());
+                            try {
+                                Log.e(TAG, "Post upload failed: " + response.errorBody().string());
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error reading response", e);
+                            }
                             Toast.makeText(PostCreate.this, "Post upload failed", Toast.LENGTH_SHORT).show();
                         }
                     }

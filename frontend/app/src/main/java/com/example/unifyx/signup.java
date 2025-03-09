@@ -1,6 +1,7 @@
 package com.example.unifyx;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,12 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -35,6 +32,7 @@ public class signup extends AppCompatActivity {
         if (currentUser != null) {
             Intent intent = new Intent(signup.this, choose_role.class);
             intent.putExtra("uid", currentUser.getUid()); // Pass UID
+            intent.putExtra("email", currentUser.getEmail()); // Pass Email
             startActivity(intent);
             finish();
         }
@@ -90,10 +88,19 @@ public class signup extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
+                                // 🔹 Store email in SharedPreferences
+                                SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("email", user.getEmail());
+                                editor.putString("uid", user.getUid()); // Store the UID")
+                                editor.apply(); // Save changes
+
                                 Toast.makeText(signup.this, "Account created", Toast.LENGTH_SHORT).show();
+
+                                // 🔹 Start choose_role activity
                                 Intent intent = new Intent(signup.this, choose_role.class);
-                                intent.putExtra("uid", user.getUid());// Pass UID to choose_role
-                                intent.putExtra("email",user.getEmail());
+                                intent.putExtra("uid", user.getUid()); // Pass UID to choose_role
+                                intent.putExtra("email", user.getEmail()); // Pass Email
                                 startActivity(intent);
                                 finish();
                             }

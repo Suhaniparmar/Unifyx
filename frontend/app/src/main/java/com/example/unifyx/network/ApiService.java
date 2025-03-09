@@ -11,6 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 import com.example.unifyx.model.ContractorProfile;
 import com.example.unifyx.model.OwnerProfile;
@@ -35,8 +36,8 @@ public interface ApiService {
     @POST("/contractor")
     Call<ContractorProfile> addContractor(@Body ContractorProfile contractor);
 
-    @GET("/worker")
-    Call<WorkerProfile> getWorkers();
+    @GET("/worker/profile")
+    Call<WorkerProfile> getWorker(@Query("email") String emai);
 
     @POST("/worker")
     Call<WorkerProfile> addWorker(@Body WorkerProfile worker);
@@ -55,6 +56,7 @@ public interface ApiService {
     @Multipart
     @POST("/posts/upload")
     Call<ResponseBody> createPost(
+            @Part("uid") RequestBody uid, // Replace with actual owner UID"
             @Part("description") RequestBody description,
             @Part("worker_category") RequestBody workerCategory,
             @Part("site_address") RequestBody siteAddress,
@@ -70,7 +72,16 @@ public interface ApiService {
     @GET("/users/role/{uid}")
     Call<Map<String, String>> getUserRole(@Path("uid") String uid);
 
-    
-    
+    @GET("/owner/profile")
+    Call<OwnerProfile> getOwnerProfile(@Query("email") String email);
+
+    @GET("/posts/owner/{uid}")
+    Call<List<Post>> getUserPosts(@Path("uid") String uid);
+
+    @GET("/posts/all")
+    Call<List<Post>> getAllPosts();
+
+
+
 
 }

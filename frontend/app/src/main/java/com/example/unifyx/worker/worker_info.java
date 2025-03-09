@@ -9,9 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.unifyx.R;
-import com.example.unifyx.contractor.contractor_info;
-import com.example.unifyx.model.ContractorProfile;
-import com.example.unifyx.model.OwnerProfile;
 import com.example.unifyx.model.WorkerProfile;
 import com.example.unifyx.network.ApiService;
 import com.example.unifyx.network.RetrofitClient;
@@ -20,7 +17,6 @@ import com.example.unifyx.owner.owner_info;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,7 +67,7 @@ public class worker_info extends AppCompatActivity {
                 public void onResponse(Call<WorkerProfile> call, Response<WorkerProfile> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(worker_info.this, "Data Submitted", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(worker_info.this, worker_home.class);
+                        Intent intent = new Intent(worker_info.this, WorkerHome.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(worker_info.this, "Error: " + response.code(), Toast.LENGTH_SHORT).show();

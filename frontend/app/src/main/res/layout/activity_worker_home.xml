@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4EFE5"
-    tools:context="com.example.unifyx.MainActivity">
+    tools:context="com.example.unifyx.worker.WorkerHome">
 
     <!-- Navbar -->
     <View
@@ -18,26 +18,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Icon 1 -->
-
-    <!-- Icon 2 -->
-
-    <!-- CardView -->
-
-    <!-- TextView -->
-
+    <!-- Icons -->
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/menu"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="328dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Menu Icon"
         app:layout_constraintBottom_toBottomOf="@id/navbar"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/navbar"
-        app:layout_constraintVertical_bias="0.64"
-        app:srcCompat="@drawable/profile_logo" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/menu_logo" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -53,23 +46,28 @@
         app:layout_constraintVertical_bias="0.64"
         app:srcCompat="@drawable/search_logo" />
 
-
-
-
-    <!--    <?xml version="1.0" encoding="utf-8"?>-->
     <ImageView
-        android:id="@+id/menu"
+        android:id="@+id/imageView2"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Menu Icon"
+        android:layout_marginStart="328dp"
+        android:layout_marginEnd="17dp"
         app:layout_constraintBottom_toBottomOf="@id/navbar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/navbar"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/menu_logo" />
+        app:layout_constraintVertical_bias="0.64"
+        app:srcCompat="@drawable/profile_logo" />
 
-
-
+    <!-- RecyclerView to display posts -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/workerPostRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/navbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
