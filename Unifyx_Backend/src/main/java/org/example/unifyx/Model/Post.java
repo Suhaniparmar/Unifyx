@@ -12,12 +12,8 @@ public class Post {
     private int postId;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private OwnerProfile owner;
-
-    @ManyToOne
-    @JoinColumn(name = "contractor_id")
-    private ContractorProfile contractor;
+    @JoinColumn(name = "uid", referencedColumnName = "uid", nullable = false)
+    private Users user;
 
     private String description;
     private String workerCategory;
@@ -35,11 +31,8 @@ public class Post {
     public int getPostId() { return postId; }
     public void setPostId(int postId) { this.postId = postId; }
 
-    public OwnerProfile getOwner() { return owner; }
-    public void setOwner(OwnerProfile owner) { this.owner = owner; }
-
-    public ContractorProfile getContractor() { return contractor; }
-    public void setContractor(ContractorProfile contractor) { this.contractor = contractor; }
+    public Users getUser() { return user; }
+    public void setUser(Users user) { this.user = user; }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
@@ -55,6 +48,9 @@ public class Post {
 
     public String getDuration() { return duration; }
     public void setDuration(String duration) { this.duration = duration; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
     public List<String> getPhotos() { return photos; }
     public void setPhotos(List<String> photos) { this.photos = photos; }

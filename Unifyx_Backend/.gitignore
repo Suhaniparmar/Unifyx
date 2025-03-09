@@ -1,4 +1,2 @@
-src/main/java/com/yourpackage/CloudinaryConfig.java
-src/main/java/org/example/unifyx/cloudinary/CloudinaryConfig.java
 src/main/resources/firebase-service-account.json
 target/classes/firebase-service-account.json

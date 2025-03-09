@@ -22,4 +22,17 @@ public class WorkerProfileController {
         return new ResponseEntity<>(savedWorker, HttpStatus.CREATED);
     }
 
+    @GetMapping("/profile")
+    public ResponseEntity<WorkerProfile> getWorkerProfile(@RequestParam String email) {
+        WorkerProfile worker = workerProfileService.getWorkerByEmail(email);
+        if(worker != null) {
+            return ResponseEntity.ok(worker);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+
+
+
 }

@@ -1,10 +1,13 @@
 package org.example.unifyx.service;
 
 import org.example.unifyx.Model.Post;
+import org.example.unifyx.Model.Users;
 import org.example.unifyx.cloudinary.CloudinaryService;
 import org.example.unifyx.repository.PostRepository;
+import org.example.unifyx.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -14,14 +17,20 @@ import java.util.List;
 @Service
 public class PostService {
 
+
+    @Autowired
+    UserRepository userRepository;
+
     @Autowired
     private CloudinaryService cloudinaryService;
 
     @Autowired
     private PostRepository postRepository;
 
-    public Post createPostWithImages(Post post, List<MultipartFile> images) {
+    public Post createPostWithImages(Post post, List<MultipartFile> images, String ownerUid) {
         try {
+            Users user = userRepository.findByUid(ownerUid).orElseThrow(() -> new RuntimeException("Owner not found"));
+            post.setUser(user);
             List<String> imageUrls = new ArrayList<>();
 
             if (images != null && !images.isEmpty()) {
@@ -44,8 +53,9 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Post getPostById(int postId) {
-        return postRepository.findById(postId).orElse(null);
+    @Transactional
+    public List<Post> getPostsByUserUid(String uid) {
+        return postRepository.findByUser_Uid(uid);
     }
 
     public boolean deletePost(int postId) {

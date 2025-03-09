@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OwnerProfileRepository extends JpaRepository<OwnerProfile, Integer> {
     // You can add custom queries here if necessary
+    OwnerProfile findByEmail(String email);
 }

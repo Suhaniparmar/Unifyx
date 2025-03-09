@@ -22,8 +22,8 @@ public class OwnerHomeController {
     public ResponseEntity<String> createPost(
             @RequestPart("post") Post post,
             @RequestPart(value = "images", required = false) List<MultipartFile> images) {
-
-        postService.createPostWithImages(post, images);
+        String ownerUid = post.getUser().getUid();
+        postService.createPostWithImages(post, images, ownerUid);
         return ResponseEntity.ok("Post created successfully!");
     }
 

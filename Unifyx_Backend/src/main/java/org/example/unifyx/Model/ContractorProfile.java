@@ -17,8 +17,8 @@ public class ContractorProfile {
     @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Portfolio> portfolios;
 
-    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts;
+//    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Post> posts;
 
     // Getters and Setters
     public int getContractorId() { return contractorId; }
@@ -39,6 +39,6 @@ public class ContractorProfile {
     public List<Portfolio> getPortfolios() { return portfolios; }
     public void setPortfolios(List<Portfolio> portfolios) { this.portfolios = portfolios; }
 
-    public List<Post> getPosts() { return posts; }
-    public void setPosts(List<Post> posts) { this.posts = posts; }
+//    public List<Post> getPosts() { return posts; }
+//    public void setPosts(List<Post> posts) { this.posts = posts; }
 }

@@ -13,10 +13,10 @@ public class OwnerProfile {
     private String email;
     private String phoneNo;
     private String address;
-    private String siteAddress;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts;
+
+//    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Post> posts;
 
     // Getters and Setters
     public int getOwnerId() {
@@ -59,20 +59,14 @@ public class OwnerProfile {
         this.address = address;
     }
 
-    public String getSiteAddress() {
-        return siteAddress;
-    }
-
-    public void setSiteAddress(String siteAddress) {
-        this.siteAddress = siteAddress;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
 
 
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
+//    public List<Post> getPosts() {
+//        return posts;
+//    }
+//
+//
+//    public void setPosts(List<Post> posts) {
+//        this.posts = posts;
+//    }
 }

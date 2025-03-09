@@ -12,7 +12,10 @@ public class WorkerProfileService {
 
 
     public WorkerProfile addWorkerProfile(WorkerProfile workerProfile) {
-        workerProfileRepository.save(workerProfile);
-        return workerProfile;
+        return workerProfileRepository.save(workerProfile);
+    }
+
+    public WorkerProfile getWorkerByEmail(String email) {
+        return workerProfileRepository.findByEmail(email);
     }
 }
