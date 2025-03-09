@@ -1,0 +1,822 @@
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"$PROJECT_DIR$/..\" vcs=\"Git\" />\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/.idea/vcs.xml	(date 1741513515727)
+@@ -2,5 +2,6 @@
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/main/java/org/example/unifyx/Model/ContractorProfile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.Model;\r\n\r\nimport jakarta.persistence.*;\r\nimport java.util.List;\r\n\r\n@Entity\r\npublic class ContractorProfile {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private int contractorId;\r\n\r\n    private String name;\r\n    private String email;\r\n    private String siteAddress;\r\n    private String phoneNo;\r\n\r\n    @OneToMany(mappedBy = \"contractor\", cascade = CascadeType.ALL, orphanRemoval = true)\r\n    private List<Portfolio> portfolios;\r\n\r\n    @OneToMany(mappedBy = \"contractor\", cascade = CascadeType.ALL, orphanRemoval = true)\r\n    private List<Post> posts;\r\n\r\n    // Getters and Setters\r\n    public int getContractorId() { return contractorId; }\r\n    public void setContractorId(int contractorId) { this.contractorId = contractorId; }\r\n\r\n    public String getName() { return name; }\r\n    public void setName(String name) { this.name = name; }\r\n\r\n    public String getEmail() { return email; }\r\n    public void setEmail(String email) { this.email = email; }\r\n\r\n    public String getSiteAddress() { return siteAddress; }\r\n    public void setSiteAddress(String siteAddress) { this.siteAddress = siteAddress; }\r\n\r\n    public String getPhoneNo() { return phoneNo; }\r\n    public void setPhoneNo(String phoneNo) { this.phoneNo = phoneNo; }\r\n\r\n    public List<Portfolio> getPortfolios() { return portfolios; }\r\n    public void setPortfolios(List<Portfolio> portfolios) { this.portfolios = portfolios; }\r\n\r\n    public List<Post> getPosts() { return posts; }\r\n    public void setPosts(List<Post> posts) { this.posts = posts; }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/Model/ContractorProfile.java b/src/main/java/org/example/unifyx/Model/ContractorProfile.java
+--- a/src/main/java/org/example/unifyx/Model/ContractorProfile.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/Model/ContractorProfile.java	(date 1741513515727)
+@@ -17,8 +17,8 @@
+     @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
+     private List<Portfolio> portfolios;
+ 
+-    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
+-    private List<Post> posts;
++//    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
++//    private List<Post> posts;
+ 
+     // Getters and Setters
+     public int getContractorId() { return contractorId; }
+@@ -39,6 +39,6 @@
+     public List<Portfolio> getPortfolios() { return portfolios; }
+     public void setPortfolios(List<Portfolio> portfolios) { this.portfolios = portfolios; }
+ 
+-    public List<Post> getPosts() { return posts; }
+-    public void setPosts(List<Post> posts) { this.posts = posts; }
++//    public List<Post> getPosts() { return posts; }
++//    public void setPosts(List<Post> posts) { this.posts = posts; }
+ }
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <annotationProcessing>\r\n      <profile default=\"true\" name=\"Default\" enabled=\"true\" />\r\n      <profile name=\"Annotation profile for Unifyx\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <processorPath useClasspath=\"false\">\r\n          <entry name=\"$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar\" />\r\n        </processorPath>\r\n        <module name=\"Unifyx_Backend\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n  <component name=\"JavacSettings\">\r\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\r\n      <module name=\"Unifyx_Backend\" options=\"-parameters\" />\r\n    </option>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/.idea/compiler.xml	(date 1741513539108)
+@@ -3,20 +3,9 @@
+   <component name="CompilerConfiguration">
+     <annotationProcessing>
+       <profile default="true" name="Default" enabled="true" />
+-      <profile name="Annotation profile for Unifyx" enabled="true">
+-        <sourceOutputDir name="target/generated-sources/annotations" />
+-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+-        <outputRelativeToContentRoot value="true" />
+-        <processorPath useClasspath="false">
+-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+-        </processorPath>
+-        <module name="Unifyx_Backend" />
+-      </profile>
+     </annotationProcessing>
+-  </component>
+-  <component name="JavacSettings">
+-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+-      <module name="Unifyx_Backend" options="-parameters" />
+-    </option>
++    <bytecodeTargetLevel>
++      <module name="Unifyx_Backend" target="17" />
++    </bytecodeTargetLevel>
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/main/java/org/example/unifyx/Model/OwnerProfile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.Model;\r\n\r\nimport jakarta.persistence.*;\r\nimport java.util.List;\r\n\r\n@Entity\r\npublic class OwnerProfile {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private int ownerId;\r\n\r\n    private String name;\r\n    private String email;\r\n    private String phoneNo;\r\n    private String address;\r\n    private String siteAddress;\r\n\r\n    @OneToMany(mappedBy = \"owner\", cascade = CascadeType.ALL, orphanRemoval = true)\r\n    private List<Post> posts;\r\n\r\n    // Getters and Setters\r\n    public int getOwnerId() {\r\n        return ownerId;\r\n    }\r\n\r\n    public void setOwnerId(int ownerId) {\r\n        this.ownerId = ownerId;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public String getEmail() {\r\n        return email;\r\n    }\r\n\r\n    public void setEmail(String email) {\r\n        this.email = email;\r\n    }\r\n\r\n    public String getPhoneNo() {\r\n        return phoneNo;\r\n    }\r\n\r\n    public void setPhoneNo(String phoneNo) {\r\n        this.phoneNo = phoneNo;\r\n    }\r\n\r\n    public String getAddress() {\r\n        return address;\r\n    }\r\n\r\n    public void setAddress(String address) {\r\n        this.address = address;\r\n    }\r\n\r\n    public String getSiteAddress() {\r\n        return siteAddress;\r\n    }\r\n\r\n    public void setSiteAddress(String siteAddress) {\r\n        this.siteAddress = siteAddress;\r\n    }\r\n\r\n    public List<Post> getPosts() {\r\n        return posts;\r\n    }\r\n\r\n\r\n    public void setPosts(List<Post> posts) {\r\n        this.posts = posts;\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/Model/OwnerProfile.java b/src/main/java/org/example/unifyx/Model/OwnerProfile.java
+--- a/src/main/java/org/example/unifyx/Model/OwnerProfile.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/Model/OwnerProfile.java	(date 1741513515727)
+@@ -13,10 +13,10 @@
+     private String email;
+     private String phoneNo;
+     private String address;
+-    private String siteAddress;
+ 
+-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+-    private List<Post> posts;
++
++//    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
++//    private List<Post> posts;
+ 
+     // Getters and Setters
+     public int getOwnerId() {
+@@ -59,20 +59,14 @@
+         this.address = address;
+     }
+ 
+-    public String getSiteAddress() {
+-        return siteAddress;
+-    }
+-
+-    public void setSiteAddress(String siteAddress) {
+-        this.siteAddress = siteAddress;
+-    }
+ 
+-    public List<Post> getPosts() {
+-        return posts;
+-    }
+ 
+-
+-    public void setPosts(List<Post> posts) {
+-        this.posts = posts;
+-    }
++//    public List<Post> getPosts() {
++//        return posts;
++//    }
++//
++//
++//    public void setPosts(List<Post> posts) {
++//        this.posts = posts;
++//    }
+ }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_23\" default=\"true\" project-jdk-name=\"23\" project-jdk-type=\"JavaSDK\" />\r\n</project>
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/.idea/misc.xml	(date 1741513539093)
+@@ -1,12 +1,5 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="MavenProjectsManager">
+-    <option name="originalFiles">
+-      <list>
+-        <option value="$PROJECT_DIR$/pom.xml" />
+-      </list>
+-    </option>
+-  </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="23" project-jdk-type="JavaSDK" />
++  <component name="ProjectRootManager" version="2" default="true" />
+ </project>
+\ No newline at end of file
+Index: src/main/java/org/example/unifyx/repository/WorkerProfileRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.repository;\r\n\r\nimport org.example.unifyx.Model.WorkerProfile;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.stereotype.Repository;\r\n\r\n@Repository\r\npublic interface WorkerProfileRepository extends JpaRepository<WorkerProfile, Integer> {\r\n    // Custom queries can be added here if necessary\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/repository/WorkerProfileRepository.java b/src/main/java/org/example/unifyx/repository/WorkerProfileRepository.java
+--- a/src/main/java/org/example/unifyx/repository/WorkerProfileRepository.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/repository/WorkerProfileRepository.java	(date 1741513515758)
+@@ -1,5 +1,6 @@
+ package org.example.unifyx.repository;
+ 
++import org.example.unifyx.Model.OwnerProfile;
+ import org.example.unifyx.Model.WorkerProfile;
+ import org.springframework.data.jpa.repository.JpaRepository;
+ import org.springframework.stereotype.Repository;
+@@ -7,4 +8,5 @@
+ @Repository
+ public interface WorkerProfileRepository extends JpaRepository<WorkerProfile, Integer> {
+     // Custom queries can be added here if necessary
++    WorkerProfile findByEmail(String email);
+ }
+Index: src/main/java/org/example/unifyx/repository/UserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.repository;\r\n\r\nimport org.example.unifyx.Model.Users;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport java.util.Optional;\r\n\r\npublic interface UserRepository extends JpaRepository<Users, Long> {\r\n    Optional<Users> findByEmail(String email);\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/repository/UserRepository.java b/src/main/java/org/example/unifyx/repository/UserRepository.java
+--- a/src/main/java/org/example/unifyx/repository/UserRepository.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/repository/UserRepository.java	(date 1741513515758)
+@@ -1,9 +1,25 @@
+ package org.example.unifyx.repository;
+ 
++
+ import org.example.unifyx.Model.Users;
+ import org.springframework.data.jpa.repository.JpaRepository;
++import org.springframework.data.jpa.repository.Query;
++import org.springframework.data.repository.query.Param;
++import org.springframework.stereotype.Repository;
++
+ import java.util.Optional;
+ 
+-public interface UserRepository extends JpaRepository<Users, Long> {
++@Repository
++public interface UserRepository extends JpaRepository<Users, String> {
++
++    @Query("SELECT u.role FROM Users u WHERE u.uid = :uid")
++    String findRoleByUid(@Param("uid") String uid);
++
+     Optional<Users> findByEmail(String email);
++
++    Optional<Users> findByUid(String uid);
++
++    Users findUserByUid(String uid);
+ }
++
++
+Index: src/main/java/org/example/unifyx/service/OwnerProfileService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.service;\r\n\r\n\r\nimport org.example.unifyx.Model.OwnerProfile;\r\nimport org.example.unifyx.repository.OwnerProfileRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\n\r\n@Service\r\npublic class OwnerProfileService {\r\n\r\n    @Autowired\r\n    private OwnerProfileRepository ownerProfileRepository;\r\n\r\n\r\n    public OwnerProfile addOwnerProfile(OwnerProfile ownerProfile) {\r\n\r\n        System.out.println(\"Saving owner: \" + ownerProfile);\r\n        return ownerProfileRepository.save(ownerProfile);\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/service/OwnerProfileService.java b/src/main/java/org/example/unifyx/service/OwnerProfileService.java
+--- a/src/main/java/org/example/unifyx/service/OwnerProfileService.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/service/OwnerProfileService.java	(date 1741513515758)
+@@ -14,8 +14,11 @@
+ 
+ 
+     public OwnerProfile addOwnerProfile(OwnerProfile ownerProfile) {
+-
+-        System.out.println("Saving owner: " + ownerProfile);
+         return ownerProfileRepository.save(ownerProfile);
+     }
++
++    public OwnerProfile getOwnerByEmail(String email) {
++        return ownerProfileRepository.findByEmail(email);
++
++    }
+ }
+Index: src/main/java/org/example/unifyx/Model/Post.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.Model;\r\n\r\nimport jakarta.persistence.*;\r\nimport java.util.List;\r\n\r\n@Entity\r\n@Table(name = \"posts\")\r\npublic class Post {\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private int postId;\r\n\r\n    @ManyToOne\r\n    @JoinColumn(name = \"owner_id\")\r\n    private OwnerProfile owner;\r\n\r\n    @ManyToOne\r\n    @JoinColumn(name = \"contractor_id\")\r\n    private ContractorProfile contractor;\r\n\r\n    private String description;\r\n    private String workerCategory;\r\n    private String siteAddress;\r\n    private String location;\r\n    private String duration;\r\n    private String status;\r\n\r\n    @ElementCollection\r\n    @CollectionTable(name = \"post_images\", joinColumns = @JoinColumn(name = \"post_id\"))\r\n    @Column(name = \"image_url\")\r\n    private List<String> photos;  // List of Cloudinary URLs\r\n\r\n    // Getters & Setters\r\n    public int getPostId() { return postId; }\r\n    public void setPostId(int postId) { this.postId = postId; }\r\n\r\n    public OwnerProfile getOwner() { return owner; }\r\n    public void setOwner(OwnerProfile owner) { this.owner = owner; }\r\n\r\n    public ContractorProfile getContractor() { return contractor; }\r\n    public void setContractor(ContractorProfile contractor) { this.contractor = contractor; }\r\n\r\n    public String getDescription() { return description; }\r\n    public void setDescription(String description) { this.description = description; }\r\n\r\n    public String getWorkerCategory() { return workerCategory; }\r\n    public void setWorkerCategory(String workerCategory) { this.workerCategory = workerCategory; }\r\n\r\n    public String getSiteAddress() { return siteAddress; }\r\n    public void setSiteAddress(String siteAddress) { this.siteAddress = siteAddress; }\r\n\r\n    public String getLocation() { return location; }\r\n    public void setLocation(String location) { this.location = location; }\r\n\r\n    public String getDuration() { return duration; }\r\n    public void setDuration(String duration) { this.duration = duration; }\r\n\r\n    public List<String> getPhotos() { return photos; }\r\n    public void setPhotos(List<String> photos) { this.photos = photos; }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/Model/Post.java b/src/main/java/org/example/unifyx/Model/Post.java
+--- a/src/main/java/org/example/unifyx/Model/Post.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/Model/Post.java	(date 1741513515748)
+@@ -12,12 +12,8 @@
+     private int postId;
+ 
+     @ManyToOne
+-    @JoinColumn(name = "owner_id")
+-    private OwnerProfile owner;
+-
+-    @ManyToOne
+-    @JoinColumn(name = "contractor_id")
+-    private ContractorProfile contractor;
++    @JoinColumn(name = "uid", referencedColumnName = "uid", nullable = false)
++    private Users user;
+ 
+     private String description;
+     private String workerCategory;
+@@ -35,11 +31,8 @@
+     public int getPostId() { return postId; }
+     public void setPostId(int postId) { this.postId = postId; }
+ 
+-    public OwnerProfile getOwner() { return owner; }
+-    public void setOwner(OwnerProfile owner) { this.owner = owner; }
+-
+-    public ContractorProfile getContractor() { return contractor; }
+-    public void setContractor(ContractorProfile contractor) { this.contractor = contractor; }
++    public Users getUser() { return user; }
++    public void setUser(Users user) { this.user = user; }
+ 
+     public String getDescription() { return description; }
+     public void setDescription(String description) { this.description = description; }
+@@ -56,6 +49,9 @@
+     public String getDuration() { return duration; }
+     public void setDuration(String duration) { this.duration = duration; }
+ 
++    public String getStatus() { return status; }
++    public void setStatus(String status) { this.status = status; }
++
+     public List<String> getPhotos() { return photos; }
+     public void setPhotos(List<String> photos) { this.photos = photos; }
+ }
+Index: src/main/java/org/example/unifyx/Model/Users.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.Model;\r\n\r\nimport jakarta.persistence.*;\r\n\r\n@Entity\r\n@Table(name = \"users\")\r\npublic class Users {\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n\r\n    @Column(nullable = false, unique = true)\r\n    private String email;\r\n\r\n    @Column(nullable = false)\r\n    private String password;\r\n\r\n    @Column(nullable = false)\r\n    private String role;\r\n\r\n    @Version  // Optimistic Locking\r\n    private Long version;\r\n\r\n    // Constructors\r\n    public Users() {}\r\n\r\n    public Users(String email, String password, String role) {\r\n        this.email = email;\r\n        this.password = password;\r\n        this.role = role;\r\n    }\r\n\r\n    // Getters & Setters\r\n    public Long getId() { return id; }\r\n    public void setId(Long id) { this.id = id; }\r\n\r\n    public String getEmail() { return email; }\r\n    public void setEmail(String email) { this.email = email; }\r\n\r\n    public String getPassword() { return password; }\r\n    public void setPassword(String password) { this.password = password; }\r\n\r\n    public String getRole() { return role; }\r\n    public void setRole(String role) { this.role = role; }\r\n\r\n    public Long getVersion() { return version; }\r\n    public void setVersion(Long version) { this.version = version; }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/Model/Users.java b/src/main/java/org/example/unifyx/Model/Users.java
+--- a/src/main/java/org/example/unifyx/Model/Users.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/Model/Users.java	(date 1741513515748)
+@@ -10,11 +10,12 @@
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private Long id;
+ 
++    @Column(nullable = false, unique = true)
++    private String uid;
++
+     @Column(nullable = false, unique = true)
+     private String email;
+ 
+-    @Column(nullable = false)
+-    private String password;
+ 
+     @Column(nullable = false)
+     private String role;
+@@ -25,22 +26,28 @@
+     // Constructors
+     public Users() {}
+ 
+-    public Users(String email, String password, String role) {
++    public Users(String uid, String email, String role) {
++        this.uid = uid;
+         this.email = email;
+-        this.password = password;
+         this.role = role;
+     }
+ 
+     // Getters & Setters
+-    public Long getId() { return id; }
+-    public void setId(Long id) { this.id = id; }
++
++    public Long getId() {
++        return id;
++    }
++
++    public void setId(Long id) {
++        this.id = id;
++    }
++
++    public String getUid() { return uid; }
++    public void setUid(String id) { this.uid = id; }
+ 
+     public String getEmail() { return email; }
+     public void setEmail(String email) { this.email = email; }
+ 
+-    public String getPassword() { return password; }
+-    public void setPassword(String password) { this.password = password; }
+-
+     public String getRole() { return role; }
+     public void setRole(String role) { this.role = role; }
+ 
+Index: src/main/java/org/example/unifyx/controller/OwnerHomeController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.controller;\r\n\r\nimport org.example.unifyx.Model.OwnerProfile;\r\nimport org.example.unifyx.Model.Post;\r\nimport org.example.unifyx.service.PostService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\nimport org.springframework.web.multipart.MultipartFile;\r\n\r\nimport java.util.List;\r\n\r\n@RestController\r\n@RequestMapping(\"/owner/home\")\r\npublic class OwnerHomeController {\r\n\r\n    @Autowired\r\n    private PostService postService;\r\n\r\n    // Create a new post with Cloudinary image upload\r\n    @PostMapping(\"/newpost\")\r\n    public ResponseEntity<String> createPost(\r\n            @RequestPart(\"post\") Post post,\r\n            @RequestPart(value = \"images\", required = false) List<MultipartFile> images) {\r\n\r\n        postService.createPostWithImages(post, images);\r\n        return ResponseEntity.ok(\"Post created successfully!\");\r\n    }\r\n\r\n//    // Get all posts by a specific owner\r\n//    @GetMapping(\"/posts/{ownerId}\")\r\n//    public ResponseEntity<List<Post>> getPostsByOwner(@PathVariable OwnerProfile ownerId) {\r\n//        List<Post> posts = postService.getPostsByOwner(ownerId);\r\n//        return ResponseEntity.ok(posts);\r\n//    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/controller/OwnerHomeController.java b/src/main/java/org/example/unifyx/controller/OwnerHomeController.java
+--- a/src/main/java/org/example/unifyx/controller/OwnerHomeController.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/controller/OwnerHomeController.java	(date 1741513515754)
+@@ -22,8 +22,8 @@
+     public ResponseEntity<String> createPost(
+             @RequestPart("post") Post post,
+             @RequestPart(value = "images", required = false) List<MultipartFile> images) {
+-
+-        postService.createPostWithImages(post, images);
++        String ownerUid = post.getUser().getUid();
++        postService.createPostWithImages(post, images, ownerUid);
+         return ResponseEntity.ok("Post created successfully!");
+     }
+ 
+Index: src/main/java/org/example/unifyx/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.service;\r\n\r\nimport org.example.unifyx.Model.Users;\r\nimport org.example.unifyx.repository.UserRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\nimport org.springframework.transaction.annotation.Transactional;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@Service\r\npublic class UserService {\r\n\r\n    @Autowired\r\n    private UserRepository userRepository;\r\n\r\n    public List<Users> getAllUsers() {\r\n        return userRepository.findAll();\r\n    }\r\n\r\n    public Optional<Users> getUserById(Long id) {\r\n        return userRepository.findById(id);\r\n    }\r\n\r\n    public Optional<Users> getUserByEmail(String email) {\r\n        return userRepository.findByEmail(email);\r\n    }\r\n\r\n    public Users createUser(Users user) {\r\n        return userRepository.save(user);\r\n    }\r\n\r\n    @Transactional\r\n    public Users updateUser(Long id, Users userDetails) {\r\n        return userRepository.findById(id).map(user -> {\r\n            user.setEmail(userDetails.getEmail());\r\n            user.setPassword(userDetails.getPassword());\r\n            user.setRole(userDetails.getRole());\r\n            return userRepository.save(user);\r\n        }).orElseThrow(() -> new RuntimeException(\"User not found\"));\r\n    }\r\n\r\n    public void deleteUser(Long id) {\r\n        userRepository.deleteById(id);\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/service/UserService.java b/src/main/java/org/example/unifyx/service/UserService.java
+--- a/src/main/java/org/example/unifyx/service/UserService.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/service/UserService.java	(date 1741513515758)
+@@ -19,29 +19,39 @@
+         return userRepository.findAll();
+     }
+ 
+-    public Optional<Users> getUserById(Long id) {
+-        return userRepository.findById(id);
++    public String getUserRoleById(String uid) {
++        return userRepository.findRoleByUid(uid);
+     }
+ 
+-    public Optional<Users> getUserByEmail(String email) {
+-        return userRepository.findByEmail(email);
+-    }
++
++//    public Optional<Users> getUserByEmail(String email) {
++//        return userRepository.findByEmail(email);
++//    }
++
+ 
+     public Users createUser(Users user) {
++        if (user.getEmail() == null || user.getEmail().isEmpty()) {
++            throw new IllegalArgumentException("Email cannot be null or empty");
++        }
+         return userRepository.save(user);
+     }
+ 
+     @Transactional
+-    public Users updateUser(Long id, Users userDetails) {
+-        return userRepository.findById(id).map(user -> {
++    public Users updateUser(String uid, Users userDetails) {
++        return userRepository.findById(uid).map(user -> {
+             user.setEmail(userDetails.getEmail());
+-            user.setPassword(userDetails.getPassword());
+             user.setRole(userDetails.getRole());
+             return userRepository.save(user);
+         }).orElseThrow(() -> new RuntimeException("User not found"));
+     }
+ 
+-    public void deleteUser(Long id) {
+-        userRepository.deleteById(id);
++    public void deleteUser(String uid) {
++        userRepository.deleteById(uid);
++    }
++
++
++    public Users getUserById(String uid) {
++        Optional<Users> user = userRepository.findById(uid);
++        return user.orElse(null);
+     }
+ }
+Index: src/main/java/org/example/unifyx/service/PostService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.service;\r\n\r\nimport org.example.unifyx.Model.Post;\r\nimport org.example.unifyx.cloudinary.CloudinaryService;\r\nimport org.example.unifyx.repository.PostRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\nimport org.springframework.web.multipart.MultipartFile;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n@Service\r\npublic class PostService {\r\n\r\n    @Autowired\r\n    private CloudinaryService cloudinaryService;\r\n\r\n    @Autowired\r\n    private PostRepository postRepository;\r\n\r\n    public Post createPostWithImages(Post post, List<MultipartFile> images) {\r\n        try {\r\n            List<String> imageUrls = new ArrayList<>();\r\n\r\n            if (images != null && !images.isEmpty()) {\r\n                for (MultipartFile image : images) {\r\n                    String imageUrl = cloudinaryService.uploadImage(image);\r\n                    imageUrls.add(imageUrl);\r\n                }\r\n            }\r\n            post.setPhotos(imageUrls);\r\n\r\n            return postRepository.save(post);\r\n\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            throw new RuntimeException(\"Failed to upload images\");\r\n        }\r\n    }\r\n\r\n    public List<Post> getAllPosts() {\r\n        return postRepository.findAll();\r\n    }\r\n\r\n    public Post getPostById(int postId) {\r\n        return postRepository.findById(postId).orElse(null);\r\n    }\r\n\r\n    public boolean deletePost(int postId) {\r\n        if (postRepository.existsById(postId)) {\r\n            postRepository.deleteById(postId);\r\n            return true;\r\n        }\r\n        return false;\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/service/PostService.java b/src/main/java/org/example/unifyx/service/PostService.java
+--- a/src/main/java/org/example/unifyx/service/PostService.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/service/PostService.java	(date 1741513515758)
+@@ -1,10 +1,13 @@
+ package org.example.unifyx.service;
+ 
+ import org.example.unifyx.Model.Post;
++import org.example.unifyx.Model.Users;
+ import org.example.unifyx.cloudinary.CloudinaryService;
+ import org.example.unifyx.repository.PostRepository;
++import org.example.unifyx.repository.UserRepository;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Service;
++import org.springframework.transaction.annotation.Transactional;
+ import org.springframework.web.multipart.MultipartFile;
+ 
+ import java.io.IOException;
+@@ -14,14 +17,20 @@
+ @Service
+ public class PostService {
+ 
++
++    @Autowired
++    UserRepository userRepository;
++
+     @Autowired
+     private CloudinaryService cloudinaryService;
+ 
+     @Autowired
+     private PostRepository postRepository;
+ 
+-    public Post createPostWithImages(Post post, List<MultipartFile> images) {
++    public Post createPostWithImages(Post post, List<MultipartFile> images, String ownerUid) {
+         try {
++            Users user = userRepository.findByUid(ownerUid).orElseThrow(() -> new RuntimeException("Owner not found"));
++            post.setUser(user);
+             List<String> imageUrls = new ArrayList<>();
+ 
+             if (images != null && !images.isEmpty()) {
+@@ -44,8 +53,9 @@
+         return postRepository.findAll();
+     }
+ 
+-    public Post getPostById(int postId) {
+-        return postRepository.findById(postId).orElse(null);
++    @Transactional
++    public List<Post> getPostsByUserUid(String uid) {
++        return postRepository.findByUser_Uid(uid);
+     }
+ 
+     public boolean deletePost(int postId) {
+Index: src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=Unifyx\r\nspring.datasource.url=jdbc:mysql://localhost:3306/unifyxproject\r\nspring.datasource.username=root\r\nspring.datasource.password=root\r\nspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver\r\nspring.jpa.hibernate.ddl-auto=update\r\nspring.jpa.show-sql=true\r\nspring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect\r\nserver.address=0.0.0.0\r\nserver.port=8080\r\ncloudinary.cloud-name=dhm6tu4us\r\ncloudinary.api-key=689583417732242\r\ncloudinary.api-secret=-nGM3NAjOhGbOr97D_38Ga5fT1U\r\n
+===================================================================
+diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
+--- a/src/main/resources/application.properties	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/resources/application.properties	(date 1741513515762)
+@@ -11,3 +11,4 @@
+ cloudinary.cloud-name=dhm6tu4us
+ cloudinary.api-key=689583417732242
+ cloudinary.api-secret=-nGM3NAjOhGbOr97D_38Ga5fT1U
++
+Index: src/main/java/org/example/unifyx/service/WorkerProfileService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.service;\r\n\r\nimport org.example.unifyx.Model.WorkerProfile;\r\nimport org.example.unifyx.repository.WorkerProfileRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\n\r\n@Service\r\npublic class WorkerProfileService {\r\n    @Autowired\r\n    private WorkerProfileRepository workerProfileRepository;\r\n\r\n\r\n    public WorkerProfile addWorkerProfile(WorkerProfile workerProfile) {\r\n        workerProfileRepository.save(workerProfile);\r\n        return workerProfile;\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/service/WorkerProfileService.java b/src/main/java/org/example/unifyx/service/WorkerProfileService.java
+--- a/src/main/java/org/example/unifyx/service/WorkerProfileService.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/service/WorkerProfileService.java	(date 1741513515758)
+@@ -12,7 +12,10 @@
+ 
+ 
+     public WorkerProfile addWorkerProfile(WorkerProfile workerProfile) {
+-        workerProfileRepository.save(workerProfile);
+-        return workerProfile;
++        return workerProfileRepository.save(workerProfile);
++    }
++
++    public WorkerProfile getWorkerByEmail(String email) {
++        return workerProfileRepository.findByEmail(email);
+     }
+ }
+Index: target/classes/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=Unifyx\r\nspring.datasource.url=jdbc:mysql://localhost:3306/unifyxproject\r\nspring.datasource.username=root\r\nspring.datasource.password=root\r\nspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver\r\nspring.jpa.hibernate.ddl-auto=update\r\nspring.jpa.show-sql=true\r\nspring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect\r\nserver.address=0.0.0.0\r\nserver.port=8080\r\ncloudinary.cloud-name=dhm6tu4us\r\ncloudinary.api-key=689583417732242\r\ncloudinary.api-secret=-nGM3NAjOhGbOr97D_38Ga5fT1U\r\n
+===================================================================
+diff --git a/target/classes/application.properties b/target/classes/application.properties
+--- a/target/classes/application.properties	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/target/classes/application.properties	(date 1741513515763)
+@@ -11,3 +11,4 @@
+ cloudinary.cloud-name=dhm6tu4us
+ cloudinary.api-key=689583417732242
+ cloudinary.api-secret=-nGM3NAjOhGbOr97D_38Ga5fT1U
++
+Index: src/main/java/org/example/unifyx/controller/WorkerProfileController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.controller;\r\n\r\nimport org.example.unifyx.Model.OwnerProfile;\r\nimport org.example.unifyx.Model.WorkerProfile;\r\nimport org.example.unifyx.service.WorkerProfileService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\n@RestController\r\n@RequestMapping(\"/worker\")\r\npublic class WorkerProfileController {\r\n\r\n    @Autowired\r\n    private WorkerProfileService workerProfileService;\r\n\r\n    // Create a new worker profile\r\n    @PostMapping\r\n    public ResponseEntity<WorkerProfile> createWorkerProfile(@RequestBody WorkerProfile workerProfile) {\r\n        WorkerProfile savedWorker = workerProfileService.addWorkerProfile(workerProfile);\r\n        return new ResponseEntity<>(savedWorker, HttpStatus.CREATED);\r\n    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/controller/WorkerProfileController.java b/src/main/java/org/example/unifyx/controller/WorkerProfileController.java
+--- a/src/main/java/org/example/unifyx/controller/WorkerProfileController.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/controller/WorkerProfileController.java	(date 1741513515757)
+@@ -22,4 +22,17 @@
+         return new ResponseEntity<>(savedWorker, HttpStatus.CREATED);
+     }
+ 
++    @GetMapping("/profile")
++    public ResponseEntity<WorkerProfile> getWorkerProfile(@RequestParam String email) {
++        WorkerProfile worker = workerProfileService.getWorkerByEmail(email);
++        if(worker != null) {
++            return ResponseEntity.ok(worker);
++        }else{
++            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
++        }
++    }
++
++
++
++
+ }
+Index: src/main/java/org/example/unifyx/repository/PostRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.repository;\r\n\r\nimport org.example.unifyx.Model.OwnerProfile;\r\nimport org.example.unifyx.Model.Post;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport java.util.List;\r\n\r\npublic interface PostRepository extends JpaRepository<Post, Integer> {\r\n    List<Post> findByOwner(OwnerProfile owner);\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/repository/PostRepository.java b/src/main/java/org/example/unifyx/repository/PostRepository.java
+--- a/src/main/java/org/example/unifyx/repository/PostRepository.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/repository/PostRepository.java	(date 1741513515758)
+@@ -2,9 +2,12 @@
+ 
+ import org.example.unifyx.Model.OwnerProfile;
+ import org.example.unifyx.Model.Post;
++import org.example.unifyx.Model.Users;
+ import org.springframework.data.jpa.repository.JpaRepository;
+ import java.util.List;
+ 
+ public interface PostRepository extends JpaRepository<Post, Integer> {
+-    List<Post> findByOwner(OwnerProfile owner);
++    List<Post> findByUser_Uid(String uid);
++
++
+ }
+Index: src/main/java/org/example/unifyx/repository/OwnerProfileRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.repository;\r\n\r\nimport org.example.unifyx.Model.OwnerProfile;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.stereotype.Repository;\r\n\r\n@Repository\r\npublic interface OwnerProfileRepository extends JpaRepository<OwnerProfile, Integer> {\r\n    // You can add custom queries here if necessary\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/repository/OwnerProfileRepository.java b/src/main/java/org/example/unifyx/repository/OwnerProfileRepository.java
+--- a/src/main/java/org/example/unifyx/repository/OwnerProfileRepository.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/repository/OwnerProfileRepository.java	(date 1741513515757)
+@@ -7,4 +7,5 @@
+ @Repository
+ public interface OwnerProfileRepository extends JpaRepository<OwnerProfile, Integer> {
+     // You can add custom queries here if necessary
++    OwnerProfile findByEmail(String email);
+ }
+Index: src/main/java/org/example/unifyx/controller/PostController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.controller;\r\n\r\nimport org.example.unifyx.Model.Post;\r\nimport org.example.unifyx.service.PostService;\r\nimport org.example.unifyx.cloudinary.CloudinaryService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\nimport org.springframework.web.multipart.MultipartFile;\r\n\r\nimport java.util.List;\r\n\r\n@RestController\r\n@RequestMapping(\"/posts\")\r\npublic class PostController {\r\n\r\n    @Autowired\r\n    private PostService postService;\r\n\r\n\r\n\r\n    @PostMapping(\"/upload\")\r\n    public ResponseEntity<Post> createPost(\r\n            @RequestParam(\"description\") String description,\r\n            @RequestParam(\"worker_category\") String workerCategory,\r\n            @RequestParam(\"site_address\") String siteAddress,\r\n            @RequestParam(\"site_location\") String siteLocation,\r\n            @RequestParam(\"duration\") String duration,\r\n            @RequestParam(value = \"images\", required = false) List<MultipartFile> images) {\r\n\r\n        Post post = new Post();\r\n        post.setDescription(description);\r\n        post.setWorkerCategory(workerCategory);\r\n        post.setSiteAddress(siteAddress);\r\n        post.setLocation(siteLocation);\r\n        post.setDuration(duration);\r\n\r\n        // Pass post and images for processing\r\n        Post savedPost = postService.createPostWithImages(post, images);\r\n        return ResponseEntity.ok(savedPost);\r\n    }\r\n\r\n    @GetMapping\r\n    public ResponseEntity<List<Post>> getAllPosts() {\r\n        return ResponseEntity.ok(postService.getAllPosts());\r\n    }\r\n\r\n    @GetMapping(\"/{id}\")\r\n    public ResponseEntity<Post> getPostById(@PathVariable int id) {\r\n        Post post = postService.getPostById(id);\r\n        return post != null ? ResponseEntity.ok(post) : ResponseEntity.notFound().build();\r\n    }\r\n\r\n    @DeleteMapping(\"/{id}\")\r\n    public ResponseEntity<String> deletePost(@PathVariable int id) {\r\n        boolean deleted = postService.deletePost(id);\r\n        return deleted ? ResponseEntity.ok(\"Post deleted\") : ResponseEntity.notFound().build();\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/controller/PostController.java b/src/main/java/org/example/unifyx/controller/PostController.java
+--- a/src/main/java/org/example/unifyx/controller/PostController.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/controller/PostController.java	(date 1741513515755)
+@@ -1,19 +1,30 @@
+ package org.example.unifyx.controller;
+ 
+ import org.example.unifyx.Model.Post;
++import org.example.unifyx.Model.Users;
++import org.example.unifyx.repository.PostRepository;
++import org.example.unifyx.repository.UserRepository;
+ import org.example.unifyx.service.PostService;
+ import org.example.unifyx.cloudinary.CloudinaryService;
+ import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.web.bind.annotation.*;
+ import org.springframework.web.multipart.MultipartFile;
+ 
+ import java.util.List;
++import java.util.Optional;
+ 
+ @RestController
+ @RequestMapping("/posts")
+ public class PostController {
+ 
++    @Autowired
++    private UserRepository userRepository;
++
++    @Autowired
++    private PostRepository postRepository;
++
+     @Autowired
+     private PostService postService;
+ 
+@@ -21,6 +32,7 @@
+ 
+     @PostMapping("/upload")
+     public ResponseEntity<Post> createPost(
++            @RequestParam("uid") String uid,
+             @RequestParam("description") String description,
+             @RequestParam("worker_category") String workerCategory,
+             @RequestParam("site_address") String siteAddress,
+@@ -28,27 +40,40 @@
+             @RequestParam("duration") String duration,
+             @RequestParam(value = "images", required = false) List<MultipartFile> images) {
+ 
++        Users user = userRepository.findUserByUid(uid);
++
+         Post post = new Post();
+         post.setDescription(description);
+         post.setWorkerCategory(workerCategory);
+         post.setSiteAddress(siteAddress);
+         post.setLocation(siteLocation);
+         post.setDuration(duration);
++        post.setUser(user);
+ 
+         // Pass post and images for processing
+-        Post savedPost = postService.createPostWithImages(post, images);
++        Post savedPost = postService.createPostWithImages(post, images, uid);
+         return ResponseEntity.ok(savedPost);
+     }
+ 
+-    @GetMapping
+-    public ResponseEntity<List<Post>> getAllPosts() {
+-        return ResponseEntity.ok(postService.getAllPosts());
+-    }
++
++    @GetMapping("/all")
++    public List<Post> getAllPosts() {
++
++        List<Post> posts = postRepository.findAll();
++
++        // Debugging: Check if images exist in the response
++        for (Post post : posts) {
++            System.out.println("Post ID: " + post.getPostId());
++            System.out.println("Photos: " + post.getPhotos()); // Check if this prints URLs
++        }
+ 
+-    @GetMapping("/{id}")
+-    public ResponseEntity<Post> getPostById(@PathVariable int id) {
+-        Post post = postService.getPostById(id);
+-        return post != null ? ResponseEntity.ok(post) : ResponseEntity.notFound().build();
++        return posts;
++    }
++
++    @GetMapping(value="/owner/{uid}", produces = "application/json")
++    public ResponseEntity<List<Post>> getPostsByUser(@PathVariable String uid) {
++        List<Post> posts = postService.getPostsByUserUid(uid);
++        return ResponseEntity.ok(posts);
+     }
+ 
+     @DeleteMapping("/{id}")
+Index: src/main/java/org/example/unifyx/controller/OwnerProfileController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.controller;\r\n\r\nimport org.example.unifyx.Model.OwnerProfile;\r\nimport org.example.unifyx.service.OwnerProfileService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\n@RestController\r\n@RequestMapping(\"/owner\")\r\npublic class OwnerProfileController {\r\n\r\n    @Autowired\r\n    private OwnerProfileService ownerProfileService;\r\n\r\n    // Create a new owner profile\r\n    @PostMapping\r\n    public ResponseEntity<OwnerProfile> createOwnerProfile(@RequestBody OwnerProfile ownerProfile) {\r\n        OwnerProfile savedOwner = ownerProfileService.addOwnerProfile(ownerProfile);\r\n        return new ResponseEntity<>(savedOwner, HttpStatus.CREATED);\r\n    }\r\n\r\n\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/controller/OwnerProfileController.java b/src/main/java/org/example/unifyx/controller/OwnerProfileController.java
+--- a/src/main/java/org/example/unifyx/controller/OwnerProfileController.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/controller/OwnerProfileController.java	(date 1741513515754)
+@@ -21,6 +21,16 @@
+         return new ResponseEntity<>(savedOwner, HttpStatus.CREATED);
+     }
+ 
++    @GetMapping("/profile")
++    public ResponseEntity<OwnerProfile> getOwnerProfile(@RequestParam String email) {
++        OwnerProfile owner = ownerProfileService.getOwnerByEmail(email);
++        if(owner != null) {
++            return ResponseEntity.ok(owner);
++        }else{
++            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
++        }
++    }
++
+ 
+ 
+ }
+Index: src/main/java/org/example/unifyx/controller/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.unifyx.controller;\r\n\r\nimport org.example.unifyx.Model.Users;\r\nimport org.example.unifyx.service.UserService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@RestController\r\n@RequestMapping(\"/users\")\r\npublic class UserController {\r\n\r\n    @Autowired\r\n    private UserService userService;\r\n\r\n    @GetMapping\r\n    public List<Users> getAllUsers() {\r\n        return userService.getAllUsers();\r\n    }\r\n\r\n    @GetMapping(\"/{id}\")\r\n    public ResponseEntity<Users> getUserById(@PathVariable Long id) {\r\n        return userService.getUserById(id)\r\n                .map(ResponseEntity::ok)\r\n                .orElseGet(() -> ResponseEntity.notFound().build());\r\n    }\r\n\r\n    @GetMapping(\"/email/{email}\")\r\n    public ResponseEntity<Users> getUserByEmail(@PathVariable String email) {\r\n        return userService.getUserByEmail(email)\r\n                .map(ResponseEntity::ok)\r\n                .orElseGet(() -> ResponseEntity.notFound().build());\r\n    }\r\n\r\n    @PostMapping\r\n    public Users createUser(@RequestBody Users user) {\r\n        return userService.createUser(user);\r\n    }\r\n\r\n    @PutMapping(\"/{id}\")\r\n    public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users userDetails) {\r\n        try {\r\n            return ResponseEntity.ok(userService.updateUser(id, userDetails));\r\n        } catch (RuntimeException e) {\r\n            return ResponseEntity.notFound().build();\r\n        }\r\n    }\r\n\r\n    @DeleteMapping(\"/{id}\")\r\n    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {\r\n        userService.deleteUser(id);\r\n        return ResponseEntity.noContent().build();\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/controller/UserController.java b/src/main/java/org/example/unifyx/controller/UserController.java
+--- a/src/main/java/org/example/unifyx/controller/UserController.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/src/main/java/org/example/unifyx/controller/UserController.java	(date 1741513515755)
+@@ -1,13 +1,14 @@
+ package org.example.unifyx.controller;
+ 
+ import org.example.unifyx.Model.Users;
++import org.example.unifyx.repository.UserRepository;
+ import org.example.unifyx.service.UserService;
+ import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.web.bind.annotation.*;
+ 
+-import java.util.List;
+-import java.util.Optional;
++import java.util.*;
+ 
+ @RestController
+ @RequestMapping("/users")
+@@ -16,42 +17,75 @@
+     @Autowired
+     private UserService userService;
+ 
++    @Autowired
++    private UserRepository userRepository; // Only used when necessary
++
++    // ✅ Fetch all users
+     @GetMapping
+     public List<Users> getAllUsers() {
+         return userService.getAllUsers();
+     }
+ 
+-    @GetMapping("/{id}")
+-    public ResponseEntity<Users> getUserById(@PathVariable Long id) {
+-        return userService.getUserById(id)
+-                .map(ResponseEntity::ok)
+-                .orElseGet(() -> ResponseEntity.notFound().build());
+-    }
+-
+-    @GetMapping("/email/{email}")
+-    public ResponseEntity<Users> getUserByEmail(@PathVariable String email) {
+-        return userService.getUserByEmail(email)
+-                .map(ResponseEntity::ok)
+-                .orElseGet(() -> ResponseEntity.notFound().build());
+-    }
+-
+     @PostMapping
+-    public Users createUser(@RequestBody Users user) {
+-        return userService.createUser(user);
++    public ResponseEntity<String> createUser(@RequestBody Users user) {
++        if (user.getUid() == null || user.getEmail() == null || user.getRole()==null) {
++            return ResponseEntity.badRequest().body("UID, Email and role are required");
++        }
++
++        userRepository.save(user);
++        return ResponseEntity.ok("User registered successfully");
+     }
+ 
+-    @PutMapping("/{id}")
+-    public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users userDetails) {
++    // ✅ Fetch a user by UID
++    @GetMapping("/{uid}")
++    public ResponseEntity<Users> getUserById(@PathVariable String uid) {
++        Users user = userService.getUserById(uid);
++        if (user != null) {
++            return ResponseEntity.ok(user);
++        } else {
++            return ResponseEntity.notFound().build();
++        }
++    }
++
++    @GetMapping("/role/{uid}")
++    public ResponseEntity<Map<String, String>> getUserRoleByUid(@PathVariable String uid) {
++        String role = userService.getUserRoleById(uid);
++        if (role != null) {
++            Map<String, String> response = new HashMap<>();
++            response.put("role", role);
++            return ResponseEntity.ok(response);
++        } else {
++            return ResponseEntity.status(HttpStatus.NOT_FOUND)
++                    .body(Collections.singletonMap("error", "User not found"));
++        }
++    }
++
++
++
++    // ✅ Register a new user using UserService
++    @PostMapping("/register")
++    public ResponseEntity<String> registerUser(@RequestBody Users user) {
++        if (user.getEmail() == null || user.getEmail().isEmpty()) {
++            return ResponseEntity.badRequest().body("Email cannot be null or empty");
++        }
++        userService.createUser(user);
++        return ResponseEntity.ok("User registered successfully");
++    }
++
++    // ✅ Update user details
++    @PutMapping("/{uid}")
++    public ResponseEntity<Users> updateUser(@PathVariable String uid, @RequestBody Users userDetails) {
+         try {
+-            return ResponseEntity.ok(userService.updateUser(id, userDetails));
++            return ResponseEntity.ok(userService.updateUser(uid, userDetails));
+         } catch (RuntimeException e) {
+             return ResponseEntity.notFound().build();
+         }
+     }
+ 
+-    @DeleteMapping("/{id}")
+-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+-        userService.deleteUser(id);
++    // ✅ Delete a user
++    @DeleteMapping("/{uid}")
++    public ResponseEntity<Void> deleteUser(@PathVariable String uid) {
++        userService.deleteUser(uid);
+         return ResponseEntity.noContent().build();
+     }
+ }

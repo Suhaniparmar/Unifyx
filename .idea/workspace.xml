@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0f7736b1-bc8a-424c-83a9-75b2b8d9c37d" name="Changes" comment="Application starting flow done in backend" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Unifyx" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="AnnotationType" />
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+        <entry key="$PROJECT_DIR$" value="branchs01" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Suhaniparmar&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Suhaniparmar/Unifyx.git&quot;,
+    &quot;accountId&quot;: &quot;87aae2f7-f32f-47e0-90ae-874fa7425af7&quot;
+  }
+}</component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2swHH98vzeCFp6IchW7AclLrFZB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.UnifyxApplication.executor": "Run",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/SIH/Unifyx/Unifyx/Unifyx_Backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "terminal",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.example.unifyx.service" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\suhani2\Unifyx\Unifyx\Unifyx_Backend\src\main\resources" />
+      <recent name="D:\suhani2\Unifyx\Unifyx\Unifyx_Backend\src\main\java\org\example\unifyx\secure" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\suhani2\Unifyx\Unifyx\Unifyx_Backend\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example.unifyx" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="UnifyxApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Unifyx_Backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.unifyx.UnifyxApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f7736b1-bc8a-424c-83a9-75b2b8d9c37d" name="Changes" comment="" />
+      <created>1739359626623</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739359626623</updated>
+      <workItem from="1739359627783" duration="4748000" />
+      <workItem from="1739418349110" duration="2674000" />
+      <workItem from="1739434007975" duration="562000" />
+      <workItem from="1739437846879" duration="928000" />
+      <workItem from="1739441482367" duration="3186000" />
+      <workItem from="1739460832570" duration="1225000" />
+      <workItem from="1739507484584" duration="1162000" />
+      <workItem from="1739515832620" duration="1488000" />
+      <workItem from="1739538766450" duration="763000" />
+      <workItem from="1739545096232" duration="6482000" />
+      <workItem from="1739589665655" duration="3790000" />
+      <workItem from="1739620176144" duration="1064000" />
+      <workItem from="1739629680233" duration="6657000" />
+      <workItem from="1739684399871" duration="4581000" />
+      <workItem from="1739708773387" duration="787000" />
+      <workItem from="1739802582034" duration="6920000" />
+      <workItem from="1739851870795" duration="1454000" />
+      <workItem from="1739882649122" duration="6581000" />
+      <workItem from="1739892568479" duration="5284000" />
+      <workItem from="1739898127339" duration="2831000" />
+      <workItem from="1739924040868" duration="2078000" />
+      <workItem from="1739926145352" duration="1099000" />
+      <workItem from="1739927628790" duration="171000" />
+      <workItem from="1739959977734" duration="2338000" />
+      <workItem from="1739962339271" duration="51000" />
+      <workItem from="1739966092422" duration="3526000" />
+      <workItem from="1740048282441" duration="3344000" />
+      <workItem from="1740109961759" duration="1831000" />
+      <workItem from="1740135164080" duration="252000" />
+      <workItem from="1740294799823" duration="1828000" />
+      <workItem from="1740321282213" duration="643000" />
+      <workItem from="1740326075014" duration="2358000" />
+      <workItem from="1740366256109" duration="7414000" />
+      <workItem from="1740399710109" duration="735000" />
+      <workItem from="1740450245172" duration="3733000" />
+      <workItem from="1740470934508" duration="5340000" />
+      <workItem from="1740488671550" duration="3858000" />
+      <workItem from="1740504466928" duration="144000" />
+      <workItem from="1740506116050" duration="2728000" />
+      <workItem from="1740532868470" duration="5497000" />
+      <workItem from="1740545599285" duration="973000" />
+      <workItem from="1740615873249" duration="2554000" />
+      <workItem from="1740620404560" duration="160000" />
+      <workItem from="1740715280724" duration="2813000" />
+      <workItem from="1741098690473" duration="2273000" />
+      <workItem from="1741147294816" duration="4536000" />
+      <workItem from="1741156073620" duration="5000" />
+      <workItem from="1741157945829" duration="868000" />
+      <workItem from="1741169945852" duration="138000" />
+      <workItem from="1741170116019" duration="51000" />
+      <workItem from="1741170253522" duration="18551000" />
+      <workItem from="1741226965562" duration="5591000" />
+      <workItem from="1741254376372" duration="605000" />
+      <workItem from="1741262995930" duration="485000" />
+      <workItem from="1741268097063" duration="4350000" />
+      <workItem from="1741323911381" duration="973000" />
+      <workItem from="1741325124469" duration="13586000" />
+      <workItem from="1741395422016" duration="4948000" />
+      <workItem from="1741404679416" duration="2442000" />
+      <workItem from="1741407236924" duration="20000" />
+      <workItem from="1741409877008" duration="944000" />
+      <workItem from="1741410872522" duration="970000" />
+      <workItem from="1741413320295" duration="1744000" />
+      <workItem from="1741422026808" duration="12465000" />
+      <workItem from="1741467548225" duration="2962000" />
+      <workItem from="1741472254675" duration="126000" />
+      <workItem from="1741472447879" duration="5729000" />
+      <workItem from="1741505407379" duration="1532000" />
+      <workItem from="1741513188350" duration="858000" />
+      <workItem from="1741514067350" duration="250000" />
+    </task>
+    <task id="LOCAL-00001" summary="add controllers and repositories">
+      <option name="closed" value="true" />
+      <created>1739360846367</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739360846367</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add service for post mapping in all 3 profiles">
+      <option name="closed" value="true" />
+      <created>1739419728845</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739419728845</updated>
+    </task>
+    <task id="LOCAL-00003" summary="basic information submission done for all 3 panels(backend)">
+      <option name="closed" value="true" />
+      <created>1739551693646</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739551693646</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Application starting flow done in backend">
+      <option name="closed" value="true" />
+      <created>1741325351194</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741325351194</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/backend1" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="TEXT_FILTER_SETTINGS">
+                <TextFilterSettings>
+                  <option name="MATCH_CASE" value="true" />
+                </TextFilterSettings>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add controllers and repositories" />
+    <MESSAGE value="add service for post mapping in all 3 profiles" />
+    <MESSAGE value="basic information submission done for all 3 panels(backend)" />
+    <MESSAGE value="Application starting flow done in backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Application starting flow done in backend" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.springframework.beans.factory.BeanCreationException" package="org.springframework.beans.factory" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NoClassDefFoundError" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/unifyx/cloudinary/CloudinaryConfig.java</url>
+          <line>14</line>
+          <properties field="cloudName" class="org.example.unifyx.cloudinary.CloudinaryConfig" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,0 +1,31 @@
+Index: src/main/java/org/example/unifyx/controller/WorkerHome.java
+===================================================================
+diff --git a/src/main/java/org/example/unifyx/controller/WorkerHome.java b/src/main/java/org/example/unifyx/controller/WorkerHome.java
+deleted file mode 100644
+--- a/src/main/java/org/example/unifyx/controller/WorkerHome.java	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ /dev/null	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
+@@ -1,9 +0,0 @@
+-package org.example.unifyx.controller;
+-
+-import org.springframework.stereotype.Controller;
+-import org.springframework.web.bind.annotation.RequestMapping;
+-
+-@Controller
+-@RequestMapping("/worker/home")
+-public class WorkerHome {
+-}
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>src/main/java/com/yourpackage/CloudinaryConfig.java\r\nsrc/main/java/org/example/unifyx/cloudinary/CloudinaryConfig.java\r\nsrc/main/resources/firebase-service-account.json\r\ntarget/classes/firebase-service-account.json\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	(revision 4d4ac901c45c563efb9cbe36391e81b84f7008ff)
++++ b/.gitignore	(date 1741513515727)
+@@ -1,4 +1,2 @@
+-src/main/java/com/yourpackage/CloudinaryConfig.java
+-src/main/java/org/example/unifyx/cloudinary/CloudinaryConfig.java
+ src/main/resources/firebase-service-account.json
+ target/classes/firebase-service-account.json
