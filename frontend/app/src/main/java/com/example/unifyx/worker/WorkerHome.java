@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unifyx.R;
 import com.example.unifyx.adapter.PostAdapter;
+import com.example.unifyx.adapter.PostAdapterViewer;
 import com.example.unifyx.model.Post;
 import com.example.unifyx.network.RetrofitClient;
 import com.example.unifyx.network.ApiService;
@@ -25,7 +26,7 @@ import retrofit2.Response;
 
 public class WorkerHome extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private PostAdapter postAdapter;
+    private PostAdapterViewer postAdapterViewer;
     private ApiService apiService;
     private ImageView imageView;
 
@@ -59,8 +60,8 @@ public class WorkerHome extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Post> postList = response.body();
-                    postAdapter = new PostAdapter(WorkerHome.this, postList);
-                    recyclerView.setAdapter(postAdapter);
+                    postAdapterViewer = new PostAdapterViewer(WorkerHome.this, postList);
+                    recyclerView.setAdapter(postAdapterViewer);
                 } else {
                     Log.e("WorkerHome", "Response Failed: " + response.message());
                 }

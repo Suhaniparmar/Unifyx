@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Post {
 
-    private String postId; // Firestore document ID (if needed)
+    private int postId; // Firestore document ID (if needed)
     private OwnerProfile owner;
 
     private ContractorProfile contractor;
@@ -34,11 +34,11 @@ public class Post {
     }
 
     // Getters and Setters
-    public String getPostId() {
+    public int getPostId() {
         return postId;
     }
 
-    public void setPostId(String postId) {
+    public void setPostId(int postId) {
         this.postId = postId;
     }
 
