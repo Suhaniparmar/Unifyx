@@ -4,21 +4,29 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "posts")
-public class Post {
-
+@Table(name = "posts")  // Ensure it correctly maps to the table "posts"
+public class Post{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")  // Explicitly specify the column name
     private int postId;
+
 
     @ManyToOne
     @JoinColumn(name = "uid", referencedColumnName = "uid", nullable = false)
     private Users user;
 
     private String description;
+
+    @Column(name = "worker_category") // Ensure it matches DB column name
     private String workerCategory;
+
+    @Column(name = "site_address")
     private String siteAddress;
+
+    @Column(name = "site_location")
     private String location;
+
     private String duration;
     private String status;
 
