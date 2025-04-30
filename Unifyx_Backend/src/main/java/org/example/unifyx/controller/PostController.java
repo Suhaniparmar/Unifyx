@@ -70,6 +70,17 @@ public class PostController {
         return posts;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> getPostById(@PathVariable int id) {
+        Optional<Post> post = postService.getPostById(id);
+
+        if (post.isPresent()) {
+            return ResponseEntity.ok(post.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping(value="/owner/{uid}", produces = "application/json")
     public ResponseEntity<List<Post>> getPostsByUser(@PathVariable String uid) {
         List<Post> posts = postService.getPostsByUserUid(uid);

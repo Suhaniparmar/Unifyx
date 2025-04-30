@@ -1,7 +1,7 @@
 package org.example.unifyx.controller;
 
 import org.example.unifyx.Model.Post;
-import org.example.unifyx.service.WorkerHomeService;
+import org.example.unifyx.service.ContractorHomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,16 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/worker/home")
-public class WorkerHomeController {
-
+@RequestMapping("/contractor/home")
+public class ContractorHomeController {
     @Autowired
-    private WorkerHomeService workerHomeService;
+    private ContractorHomeService contractorHomeService;
 
-
-    @GetMapping("/{workerId}/posts")
-    public ResponseEntity<List<Post>> getWorkerHomePosts(@PathVariable int workerId) {
-        List<Post> matchingPosts = workerHomeService.getMatchingPostsForWorker(workerId);
+    /**
+     * Get posts that match the worker's categories
+     */
+    @GetMapping("/{contractorId}/posts")
+    public ResponseEntity<List<Post>> getWorkerHomePosts(@PathVariable int contractorId) {
+        List<Post> matchingPosts = contractorHomeService.getMatchingPostsForContractor(contractorId);
 
         if (matchingPosts.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -29,5 +30,4 @@ public class WorkerHomeController {
 
         return ResponseEntity.ok(matchingPosts);
     }
-
 }

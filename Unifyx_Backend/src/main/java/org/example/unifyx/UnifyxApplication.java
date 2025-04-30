@@ -10,7 +10,6 @@ public class UnifyxApplication {
 
     public static void main(String[] args) {
        SpringApplication.run(UnifyxApplication.class, args);
-        System.out.println("Hello for demo...");
     }
 
 }

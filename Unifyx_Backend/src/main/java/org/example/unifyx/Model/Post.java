@@ -25,7 +25,7 @@ public class Post{
     private String siteAddress;
 
     @Column(name = "site_location")
-    private String location;
+    private String siteLocation;
 
     private String duration;
     private String status;
@@ -51,8 +51,8 @@ public class Post{
     public String getSiteAddress() { return siteAddress; }
     public void setSiteAddress(String siteAddress) { this.siteAddress = siteAddress; }
 
-    public String getLocation() { return location; }
-    public void setLocation(String location) { this.location = location; }
+    public String getLocation() { return siteLocation; }
+    public void setLocation(String siteLocation) { this.siteLocation = siteLocation; }
 
     public String getDuration() { return duration; }
     public void setDuration(String duration) { this.duration = duration; }

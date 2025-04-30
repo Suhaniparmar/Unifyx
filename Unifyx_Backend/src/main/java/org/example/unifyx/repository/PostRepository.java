@@ -9,5 +9,8 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Integer> {
     List<Post> findByUser_Uid(String uid);
 
+    List<Post> findBySiteLocation(String siteLocation);
+
+
 
 }

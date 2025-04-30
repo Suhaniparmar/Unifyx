@@ -2,8 +2,12 @@ package org.example.unifyx.service;
 
 import org.example.unifyx.Model.BidRaise;
 import org.example.unifyx.Model.Post;
+import org.example.unifyx.Model.Users;
+import org.example.unifyx.Model.WorkerProfile;
 import org.example.unifyx.repository.BidRaiseRepository;
 import org.example.unifyx.repository.PostRepository;
+import org.example.unifyx.repository.UserRepository;
+import org.example.unifyx.repository.WorkerProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,38 +18,32 @@ import java.util.Optional;
 public class BidRaiseService {
 
     @Autowired
+    private WorkerProfileRepository workerProfileRepository;
+
+    @Autowired
     private BidRaiseRepository bidRaiseRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private PostRepository postRepository;
 
-    public BidRaise raiseBid(int postId, int senderId, String senderRole, double amount, String duration, int receiverId, String receiverRole) {
-        Optional<Post> postOptional = postRepository.findById(postId);
-        if (postOptional.isEmpty()) {
-            throw new RuntimeException("Post not found with ID: " + postId);
-        }
+    public BidRaise placeBid(int senderId, int postId, Double amount, String duration) {
+        WorkerProfile sender = workerProfileRepository.findById(senderId)
+                .orElseThrow(() -> new RuntimeException("Worker not found with ID: " + senderId));
 
-        BidRaise bidRaise = new BidRaise();
-        bidRaise.setPost(postOptional.get());
-        bidRaise.setSenderId(senderId);
-        bidRaise.setSenderRole(senderRole);
-        bidRaise.setAmount(amount);
-        bidRaise.setDuration(duration);
-        bidRaise.setReceiverId(receiverId);
-        bidRaise.setReceiverRole(receiverRole);
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post not found"));
 
-        return bidRaiseRepository.save(bidRaise);
+        BidRaise bid = new BidRaise(amount, duration, sender, post);
+        return bidRaiseRepository.save(bid);
     }
 
-    public List<BidRaise> getBidsByPost(int postId) {
-        return bidRaiseRepository.findByPost_PostId(postId);
-    }
+    public List<BidRaise> getBidsForPost(int postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post not found"));
 
-    public boolean deleteBid(int bidRaiseId) {
-        if (bidRaiseRepository.existsById(bidRaiseId)) {
-            bidRaiseRepository.deleteById(bidRaiseId);
-            return true;
-        }
-        return false;
+        return bidRaiseRepository.findByPost(post);
     }
 }

@@ -10,9 +10,10 @@ public class WorkerProfileService {
     @Autowired
     private WorkerProfileRepository workerProfileRepository;
 
-
     public WorkerProfile addWorkerProfile(WorkerProfile workerProfile) {
-        return workerProfileRepository.save(workerProfile);
+        WorkerProfile savedWorkerProfile = workerProfileRepository.save(workerProfile);
+        System.out.println("Saved worker ID: " + savedWorkerProfile.getWorkerId());
+        return savedWorkerProfile;
     }
 
     public WorkerProfile getWorkerByEmail(String email) {

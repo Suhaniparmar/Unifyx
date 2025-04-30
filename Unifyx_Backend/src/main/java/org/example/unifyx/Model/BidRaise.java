@@ -1,55 +1,78 @@
 package org.example.unifyx.Model;
 
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "bid_raise")
 public class BidRaise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bid_raise_id") // Ensure it matches DB column name
-    private int bidRaiseId;
+    private Integer bidRaiseId;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @Column(nullable = false)
+    private Double amount;
 
-    @Column(name = "sender_id")
-    private int senderId;
-
-    @Column(name = "sender_role")
-    private String senderRole;
-
-    private double amount;
+    @Column(nullable = false)
     private String duration;
 
-    @Column(name = "receiver_id")
-    private int receiverId;
+    @ManyToOne
+    @JoinColumn(name = "sender_id", nullable = false)
+    private WorkerProfile sender; // User who is making the bid
 
-    @Column(name = "receiver_role")
-    private String receiverRole;
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false)
+    private Post post; // The post on which the bid is placed
 
-    // Getters and Setters
-    public int getBidRaiseId() { return bidRaiseId; }
-    public void setBidRaiseId(int bidRaiseId) { this.bidRaiseId = bidRaiseId; }
+    // Constructors
+    public BidRaise() {}
 
-    public Post getPost() { return post; }
-    public void setPost(Post post) { this.post = post; }
+    public BidRaise(Double amount, String duration, WorkerProfile sender, Post post) {
+        this.amount = amount;
+        this.duration = duration;
+        this.sender = sender;
+        this.post = post;
+    }
 
-    public int getSenderId() { return senderId; }
-    public void setSenderId(int senderId) { this.senderId = senderId; }
+    public String getDuration() {
+        return duration;
+    }
 
-    public String getSenderRole() { return senderRole; }
-    public void setSenderRole(String senderRole) { this.senderRole = senderRole; }
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 
-    public double getAmount() { return amount; }
-    public void setAmount(double amount) { this.amount = amount; }
+    public Integer getBidRaiseId() {
+        return bidRaiseId;
+    }
 
-    public String getDuration() { return duration; }
-    public void setDuration(String duration) { this.duration = duration; }
+    public void setBidRaiseId(Integer bidRaiseId) {
+        this.bidRaiseId = bidRaiseId;
+    }
 
-    public int getReceiverId() { return receiverId; }
-    public void setReceiverId(int receiverId) { this.receiverId = receiverId; }
+    public Double getAmount() {
+        return amount;
+    }
 
-    public String getReceiverRole() { return receiverRole; }
-    public void setReceiverRole(String receiverRole) { this.receiverRole = receiverRole; }
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public WorkerProfile getSender() {
+        return sender;
+    }
+
+    public void setSender(WorkerProfile sender) {
+        this.sender = sender;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+
 }
+
