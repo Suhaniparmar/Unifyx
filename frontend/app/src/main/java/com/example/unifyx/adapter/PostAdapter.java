@@ -1,14 +1,15 @@
 package com.example.unifyx.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.example.unifyx.R;
 import com.example.unifyx.model.Post;
 import com.example.unifyx.network.ApiService;
 import com.example.unifyx.network.RetrofitClient;
+import com.example.unifyx.owner.PostBidsActivity;
 
 import java.util.List;
 
@@ -34,7 +36,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private List<Post> postList;
     private Context context;
     private ApiService apiService;
-
 
     public PostAdapter(Context context, List<Post> postList) {
         this.context = context;
@@ -50,47 +51,26 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-
-
         Post post = postList.get(position);
         Log.d("PostAdapter", "Binding Post: " + post.toString());
-        Log.d("PostAdapter", "Post Photo List: " + post.getPhoto());
 
         holder.title.setText(post.getWorkerCategory());
         holder.description.setText(post.getDescription());
         holder.location.setText("📍 " + post.getLocation());
         holder.duration.setText("⏳ Duration: " + post.getDuration());
 
-        // Load image from Cloudinary using Glide
+        // Load image using Glide
         if (post.getPhoto() != null && !post.getPhoto().isEmpty()) {
             String imageUrl = post.getPhoto().get(0);
-            Log.d("PostAdapter", "Loading Image URL: " + imageUrl);
-
-            if (imageUrl == null || imageUrl.isEmpty()) {
-                Log.e("PostAdapter", "Image URL is null or empty");
-            } else {
-                Log.d("PostAdapter", "Final Image URL: " + imageUrl);
-            }
-
             if (!imageUrl.startsWith("https://")) {
                 imageUrl = imageUrl.replace("http://", "https://");
-                Log.d("PostAdapter", "Updated to HTTPS: " + imageUrl);
             }
-
-            if (holder.postImage == null) {
-                Log.e("GlideDebug", "ImageView is NULL!");
-            } else {
-                Log.d("GlideDebug", "ImageView is initialized properly.");
-            }
-
-
 
             Glide.with(context)
-                    .load(imageUrl) // Load the first image from the list
+                    .load(imageUrl)
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.error_placeholder)
-                    .listener(new com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable>() {
-
+                    .listener(new com.bumptech.glide.request.RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                             Log.e("Glide", "Image Load Failed: " + e);
@@ -105,11 +85,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     })
                     .into(holder.postImage);
         } else {
-            Log.e("PostAdapter", "No Image Found in post.getPhoto()");
             holder.postImage.setImageResource(R.drawable.placeholder);
         }
-        holder.actionButton.setOnClickListener(v -> {deletePost(post.getPostId(), position);});
+
+        // Delete Post button
         holder.actionButton.setText("Delete");
+        holder.actionButton.setOnClickListener(v -> {
+            deletePost(post.getPostId(), position);
+        });
+
+        // Show Bids button
+        holder.showBidsButton.setText("Show Bids");
+        holder.showBidsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context, PostBidsActivity.class);
+            intent.putExtra("postId", post.getPostId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -120,7 +111,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         TextView title, description, location, duration;
         ImageView postImage;
-        Button actionButton;
+        Button actionButton, showBidsButton;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -130,6 +121,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             location = itemView.findViewById(R.id.postLocation);
             duration = itemView.findViewById(R.id.postDuration);
             actionButton = itemView.findViewById(R.id.actionButton);
+            showBidsButton = itemView.findViewById(R.id.showBidsButton); // New reference
         }
     }
 
@@ -141,23 +133,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(context, "Post deleted successfully", Toast.LENGTH_SHORT).show();
                     postList.remove(position);
                     notifyItemRemoved(position);
-
-                }else{
+                } else {
                     Toast.makeText(context, "Failed to delete post", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(context,"Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
-
 }

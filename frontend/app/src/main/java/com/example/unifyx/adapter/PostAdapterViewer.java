@@ -1,13 +1,17 @@
 package com.example.unifyx.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +23,9 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.target.Target;
 import com.example.unifyx.R;
 import com.example.unifyx.model.Post;
+import com.example.unifyx.worker.WorkerBid;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -45,6 +52,7 @@ public class PostAdapterViewer extends RecyclerView.Adapter<PostAdapterViewer.Po
         Post post = postList.get(position);
         Log.d("PostAdapterViewer", "Binding Post: " + post.toString());
         Log.d("PostAdapterViewer", "Post Photo List: " + post.getPhoto());
+        Log.d("PostAdapterViewer", "Binding Post ID: " + post.getPostId());
 
         holder.title.setText(post.getWorkerCategory());
         holder.description.setText(post.getDescription());
@@ -97,7 +105,20 @@ public class PostAdapterViewer extends RecyclerView.Adapter<PostAdapterViewer.Po
         } else {
             Log.e("PostAdapterViewer", "No Image Found in post.getPhoto()");
             holder.postImage.setImageResource(R.drawable.placeholder);
+
         }
+        holder.itemView.setOnClickListener(v -> {
+            Log.d("PostAdapterViewer", "Sending postId: " + post.getPostId());
+
+            SharedPreferences sharedPreferences2 = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+            String uid = sharedPreferences2.getString("uid", null);
+            Intent intent = new Intent(context, WorkerBid.class);
+            intent.putExtra("postId", post.getPostId());
+            intent.putExtra("senderId",uid);
+
+            context.startActivity(intent);
+        });
+
     }
 
     @Override
@@ -108,6 +129,7 @@ public class PostAdapterViewer extends RecyclerView.Adapter<PostAdapterViewer.Po
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         TextView title, description, location, duration;
         ImageView postImage;
+        Button BidNow;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -116,7 +138,15 @@ public class PostAdapterViewer extends RecyclerView.Adapter<PostAdapterViewer.Po
             description = itemView.findViewById(R.id.postDescription);
             location = itemView.findViewById(R.id.postLocation);
             duration = itemView.findViewById(R.id.postDuration);
+            BidNow = itemView.findViewById(R.id.btnBidNow);
         }
     }
+    public void updateData(List<Post> newPostList) {
+        this.postList.clear();
+        this.postList.addAll(newPostList);
+        notifyDataSetChanged();
+    }
+
+
 
 }

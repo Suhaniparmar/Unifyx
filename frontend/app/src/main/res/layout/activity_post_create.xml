@@ -63,16 +63,23 @@
                 android:padding="10dp"
                 android:textColorHint="@color/gray"/>
 
-            <!-- Worker Category Multi-Select -->
-            <MultiAutoCompleteTextView
-                android:id="@+id/et_worker_category"
+            <!-- Worker/Contractor Selection Dropdown -->
+            <Spinner
+                android:id="@+id/spinner_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Select Worker Categories"
+                android:background="@drawable/edittext_border"
+                android:padding="10dp"/>
+
+            <!-- Subcategory Dropdown (Initially Hidden) -->
+            <Spinner
+                android:id="@+id/spinner_sub_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/edittext_border"
                 android:padding="10dp"
-                android:textColorHint="@color/gray"
-                android:inputType="textMultiLine"/>
+                android:visibility="gone"/>
+
 
             <!-- Site Address -->
             <EditText

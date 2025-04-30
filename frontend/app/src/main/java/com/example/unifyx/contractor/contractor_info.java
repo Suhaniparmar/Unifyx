@@ -62,7 +62,7 @@ public class contractor_info extends AppCompatActivity {
             String contact = contactEditText.getText().toString();
             String location = locationSpinner.getSelectedItem().toString();
 
-            ContractorProfile contractor = new ContractorProfile(name, email, contact, location);
+            ContractorProfile contractor = new ContractorProfile(name, email, contact, location, null);
             apiService.addContractor(contractor).enqueue(new Callback<ContractorProfile>() {
 
                 @Override

@@ -20,7 +20,9 @@ public class owner_home extends AppCompatActivity {
 
         ImageView menuIcon = findViewById(R.id.menu);
         ImageView profileLogo = findViewById(R.id.imageView2); // Profile logo ID
-        CardView addPhotosCard = findViewById(R.id.cardView); // Add Photos CardView
+        CardView addPhotosCard = findViewById(R.id.cardView);
+        ImageView searchLogo = findViewById(R.id.imageView3);
+
 
         // Handle menu icon click
         menuIcon.setOnClickListener(v -> {
@@ -33,6 +35,11 @@ public class owner_home extends AppCompatActivity {
         // Handle profile logo click
         profileLogo.setOnClickListener(v -> {
             Intent intent = new Intent(owner_home.this, OwnerProfilePage.class);
+            startActivity(intent);
+        });
+
+        searchLogo.setOnClickListener(v -> {
+            Intent intent = new Intent(owner_home.this, OwnerSearch.class);
             startActivity(intent);
         });
 

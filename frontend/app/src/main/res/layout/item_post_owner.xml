@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="6dp">
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@android:color/white">
 
         <!-- Post Image -->
         <ImageView
@@ -19,57 +20,84 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:background="@color/gray"/>
+            android:background="@drawable/placeholder"
+            android:contentDescription="Post Image" />
 
         <!-- Post Title -->
         <TextView
             android:id="@+id/postTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Post Title"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp"/>
+            android:textColor="@android:color/black"
+            android:layout_marginTop="12dp" />
 
         <!-- Post Description -->
         <TextView
             android:id="@+id/postDescription"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Post Description"
             android:textSize="16sp"
-            android:textColor="@color/gray"
-            android:layout_marginTop="4dp"/>
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="6dp" />
 
-        <!-- Location -->
-        <TextView
-            android:id="@+id/postLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="📍 Location"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="4dp"/>
-
-        <!-- Duration -->
-        <TextView
-            android:id="@+id/postDuration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="⏳ Duration"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="4dp"/>
-
-        <!-- Action Button (Delete or Make a Bid) -->
-        <Button
-            android:id="@+id/actionButton"
+        <!-- Location and Duration Row -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Action"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/red"
-            android:textColor="@color/white"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/postLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="📍 Location"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/postDuration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="⏳ Duration"
+                android:textSize="14sp"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <!-- Action Buttons Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="14dp">
+
+            <Button
+                android:id="@+id/actionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Action"
+                android:backgroundTint="@color/red"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/showBidsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Show Bids"
+                android:backgroundTint="@color/blue"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

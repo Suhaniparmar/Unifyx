@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Icons -->
+    <!-- Menu Icon -->
     <ImageView
         android:id="@+id/menu"
         android:layout_width="50dp"
@@ -32,31 +32,28 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/menu_logo" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="50dp"
+    <!-- Search Icon (Replaced with SearchView) -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="273dp"
+        android:layout_marginStart="72dp"
         android:layout_marginEnd="72dp"
+        android:queryHint="Search by Location"
         app:layout_constraintBottom_toBottomOf="@id/navbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/navbar"
-        app:layout_constraintVertical_bias="0.64"
-        app:srcCompat="@drawable/search_logo" />
+        app:layout_constraintStart_toEndOf="@id/menu"
+        app:layout_constraintTop_toTopOf="@id/navbar" />
 
+    <!-- Profile Icon -->
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="328dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@id/navbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/navbar"
-        app:layout_constraintVertical_bias="0.64"
         app:srcCompat="@drawable/profile_logo" />
 
     <!-- RecyclerView to display posts -->

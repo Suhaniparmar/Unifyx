@@ -22,6 +22,18 @@
         android:theme="@style/Theme.Unifyx"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity android:name=".owner.PostBidsActivity"
+            android:exported="false"/>
+
+        <activity android:name=".owner.OwnerSearch"
+            android:exported="false"/>
+        <activity
+            android:name=".worker.WorkerHome"
+            android:exported="false" />
+        <activity
+            android:name=".worker.WorkerBid"
+            android:exported="false" />
         <activity
             android:name=".owner.PostCreate"
             android:exported="false" />
@@ -49,9 +61,6 @@
             android:exported="false" />
         <activity
             android:name=".contractor.contractor_info"
-            android:exported="false" />
-        <activity
-            android:name=".worker.WorkerHome"
             android:exported="false" />
         <activity
             android:name=".contractor.contractor_home"

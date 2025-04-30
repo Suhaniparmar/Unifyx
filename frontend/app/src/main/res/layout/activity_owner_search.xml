@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.example.unifyx.MainActivity">
+
+    <!-- Floating Search Bar -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardsearchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:elevation="6dp"
+        android:radius="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search by name..."
+            android:iconifiedByDefault="false"
+            android:background="@android:color/white"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Filters Section (Inside a CardView) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFilters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="16dp"
+        android:elevation="4dp"
+        android:radius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cardsearchView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+<!--            &lt;!&ndash; Worker/Contractor Dropdown &ndash;&gt;-->
+<!--            <Spinner-->
+<!--                android:id="@+id/spinnerCategory"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/spinner_background"/>-->
+
+<!--            &lt;!&ndash; Sub-Category Dropdown &ndash;&gt;-->
+<!--            <Spinner-->
+<!--                android:id="@+id/spinnerSubCategory"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="12dp"-->
+<!--                android:background="@drawable/spinner_background"/>-->
+
+            <!-- Location Dropdown -->
+            <Spinner
+                android:id="@+id/spinnerLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/spinner_background"/>
+
+            <!-- Apply Filters Button -->
+            <Button
+                android:id="@+id/btnApplyFilters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Apply Filters"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_background"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- RecyclerView for Displaying Profiles -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProfiles"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/cardFilters"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

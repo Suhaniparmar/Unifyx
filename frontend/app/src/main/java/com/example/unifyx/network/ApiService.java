@@ -6,6 +6,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -14,11 +16,13 @@ import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+import com.example.unifyx.model.BidRaise;
 import com.example.unifyx.model.ContractorProfile;
 import com.example.unifyx.model.OwnerProfile;
 import com.example.unifyx.model.Post;
 import com.example.unifyx.model.Users;
 import com.example.unifyx.model.WorkerProfile;
+import com.example.unifyx.owner.Profile;
 
 import java.util.List;
 import java.util.Map;
@@ -40,8 +44,9 @@ public interface ApiService {
     @GET("/worker/profile")
     Call<WorkerProfile> getWorker(@Query("email") String emai);
 
-    @POST("/worker")
+    @POST("/worker") // Make sure the endpoint matches EXACTLY
     Call<WorkerProfile> addWorker(@Body WorkerProfile worker);
+
 
     @GET("/posts")
     Call<List<Post>> getPosts();
@@ -85,5 +90,34 @@ public interface ApiService {
     @DELETE("posts/{id}") // Adjust URL as per your API
     Call<Void> deletePost(@Path("id") int postId);
 
+
+    @POST("/bids/raise") // Adjust this based on your backend API endpoint
+    Call<ResponseBody> raiseBid(
+            @Query("senderId") int senderId,
+            @Query("postId") int postId,
+            @Query("amount") double amount,
+            @Query("duration") String duration
+    );
+
+    @GET("/posts/{id}")
+    Call<Post> getPostById(@Path("id") int postId);
+
+    @GET("/bids/post/{postId}")
+    Call<List<BidRaise>> getBidsByPost(@Path("postId") int postId);
+
+    @DELETE("/bids/{bidRaiseId}")
+    Call<Void> deleteBid(@Path("bidRaiseId") int bidRaiseId);
+
+    @GET("search/by-location")
+    Call<List<Object>> ownersearchByLocation(@Query("location") String location);
+
+    @GET("search/posts/by-location")
+    Call<List<Post>> searchByLocation(@Query("location") String location);
+
+    @GET("/worker/home/{workerId}/posts")
+    Call<List<Post>> getWorkerPosts(@Path("workerId") int workerId);
+
+    @GET("bids/post/{postId}")
+    Call<List<BidRaise>> getBidsForPost(@Path("postId") int postId);
 
 }

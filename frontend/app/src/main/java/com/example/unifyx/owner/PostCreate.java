@@ -10,11 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -29,7 +32,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -44,11 +49,14 @@ public class PostCreate extends AppCompatActivity {
     private static final int PICK_IMAGES_REQUEST = 1;
     private List<Uri> imageUris = new ArrayList<>();
     private LinearLayout imagePreviewContainer;
-    private EditText etDescription, etWorkerCategory, etSiteAddress, etSiteLocation, etDuration;
+    private EditText etDescription, etSiteAddress, etSiteLocation, etDuration;
     private Button btnSelectImages, btnSubmit;
+    private Spinner spinnerCategory, spinnerSubCategory;
     private ProgressBar progressBar;
     private ApiService apiService;
     private String uid;
+    private Map<String, List<String>> subCategoryMap;
+    private String selectedCategory = "";
 
 
     @Override
@@ -60,20 +68,78 @@ public class PostCreate extends AppCompatActivity {
         apiService = retrofitClient.getRetrofit().create(ApiService.class);
 
         etDescription = findViewById(R.id.et_description);
-        etWorkerCategory = findViewById(R.id.et_worker_category);
         etSiteAddress = findViewById(R.id.et_site_address);
         etSiteLocation = findViewById(R.id.et_site_location);
         etDuration = findViewById(R.id.et_duration);
         btnSelectImages = findViewById(R.id.btn_select_images);
         btnSubmit = findViewById(R.id.btn_submit);
+        spinnerCategory = findViewById(R.id.spinner_category);
+        spinnerSubCategory = findViewById(R.id.spinner_sub_category);
         imagePreviewContainer = findViewById(R.id.image_preview_container);
         progressBar = findViewById(R.id.progress_bar);
 
         progressBar.setVisibility(View.GONE);
 
         btnSelectImages.setOnClickListener(v -> selectImages());
+        setupCategoryDropdown();
         btnSubmit.setOnClickListener(v -> submitPost());
     }
+    private void setupCategoryDropdown() {
+        // Main categories
+        List<String> categories = new ArrayList<>();
+        categories.add("Select Category");
+        categories.add("Worker");
+        categories.add("Contractor");
+
+        // Subcategory mapping
+        subCategoryMap = new HashMap<>();
+        subCategoryMap.put("Worker", List.of("Select worker category","Painter", "Electrician", "Plaster Worker", "Tile Maker", "Carpenter", "Mason", "Welder", "Roofer", "Steel Fixer", "Concrete Laborer", "Pipefitter", "Scaffolder", "Glazier", "Insulation Worker", "Landscaper", "Paver", "Demolition Worker", "Crane Operator", "Heavy Equipment Operator", "Surveyor"));
+        subCategoryMap.put("Contractor", List.of("Select contractor category","Painting Contractor", "Electrical Contractor", "General Contractor", "Plumbing Contractor", "HVAC Contractor", "Roofing Contractor", "Flooring Contractor", "Masonry Contractor", "Carpentry Contractor", "Steel Erection Contractor", "Concrete Contractor", "Landscaping Contractor", "Demolition Contractor", "Insulation Contractor", "Glazing Contractor", "Scaffolding Contractor", "Excavation Contractor", "Drywall Contractor", "Tiling Contractor", "Fire Protection Contractor"));
+
+        // Set main category adapter
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
+        spinnerCategory.setAdapter(categoryAdapter);
+
+        // Handle category selection
+        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) { // Ignore "Select Category" option
+                    selectedCategory = categories.get(position); // Store main category
+                    updateSubCategoryDropdown(subCategoryMap.get(selectedCategory));
+                    spinnerSubCategory.setVisibility(View.VISIBLE);
+                } else {
+                    selectedCategory = ""; // Reset if no valid category is selected
+                    spinnerSubCategory.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        // Handle subcategory selection
+        spinnerSubCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) { // Ignore "Select Subcategory" option
+                    selectedCategory = subCategoryMap.get(spinnerCategory.getSelectedItem().toString()).get(position);
+                } else {
+                    selectedCategory = ""; // Reset if no valid subcategory is selected
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
+
+    private void updateSubCategoryDropdown(List<String> subCategories) {
+        ArrayAdapter<String> subCategoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, subCategories);
+        spinnerSubCategory.setAdapter(subCategoryAdapter);
+    }
+
+
 
     private void selectImages() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -126,7 +192,7 @@ public class PostCreate extends AppCompatActivity {
         SharedPreferences sharedPreferences2 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         this.uid = sharedPreferences2.getString("uid", null);
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), etDescription.getText().toString());
-        RequestBody workerCategory = RequestBody.create(MediaType.parse("text/plain"), etWorkerCategory.getText().toString());
+        RequestBody workerCategory = RequestBody.create(MediaType.parse("text/plain"), selectedCategory);
         RequestBody siteAddress = RequestBody.create(MediaType.parse("text/plain"), etSiteAddress.getText().toString());
         RequestBody siteLocation = RequestBody.create(MediaType.parse("text/plain"), etSiteLocation.getText().toString());
         RequestBody duration = RequestBody.create(MediaType.parse("text/plain"), etDuration.getText().toString());
