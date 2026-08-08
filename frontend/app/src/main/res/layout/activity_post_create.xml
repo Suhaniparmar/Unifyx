@@ -1,138 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/background"
-    tools:context="com.example.unifyx.MainActivity">
+    android:fillViewport="true"
+    android:background="@color/background">
 
-    <!-- Outer CardView for better UI -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:paddingBottom="@dimen/spacing_xl"
+        tools:context="com.example.unifyx.MainActivity">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Top Accent -->
+        <View
+            android:id="@+id/topAccent"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:background="@drawable/bg_gradient_primary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Back Button -->
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/icon_size_md"
+            android:layout_height="@dimen/icon_size_md"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:contentDescription="Back"
+            android:padding="@dimen/spacing_sm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_arrow"
+            app:tint="@color/white" />
+
+        <!-- Title in header -->
+        <TextView
+            android:id="@+id/headerTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:orientation="vertical">
+            android:text="Create Post"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold"
+            android:fontFamily="@font/open_sans_bold"
+            app:layout_constraintBottom_toBottomOf="@id/btn_back"
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="@id/btn_back"
+            android:layout_marginStart="@dimen/spacing_md" />
 
-            <!-- Image Picker -->
-            <Button
-                android:id="@+id/btn_select_images"
+        <!-- Form Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
+            app:cardCornerRadius="@dimen/radius_lg"
+            app:cardElevation="@dimen/elevation_lg"
+            app:strokeWidth="0dp"
+            app:layout_constraintTop_toBottomOf="@id/topAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.92">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Images"
-                android:drawableLeft="@drawable/ic_camera"
-                android:backgroundTint="@color/gray"
-                android:textColor="@color/white"/>
+                android:padding="@dimen/spacing_lg"
+                android:orientation="vertical">
 
-            <!-- Selected Image Preview (Horizontal Scroll) -->
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                <!-- Image Picker -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_select_images"
+                    style="@style/Unifyx.Button.Outline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Images"
+                    app:icon="@drawable/ic_camera"
+                    app:iconGravity="start"
+                    app:strokeColor="@color/colorOutline"
+                    app:cornerRadius="@dimen/radius_md"
+                    android:textColor="@color/textPrimary" />
 
-                <LinearLayout
-                    android:id="@+id/image_preview_container"
+                <!-- Image Preview -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm">
+
+                    <LinearLayout
+                        android:id="@+id/image_preview_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+
+                <!-- Description -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:hint="Description"
+                    app:boxCornerRadiusTopStart="@dimen/radius_md"
+                    app:boxCornerRadiusTopEnd="@dimen/radius_md"
+                    app:boxCornerRadiusBottomStart="@dimen/radius_md"
+                    app:boxCornerRadiusBottomEnd="@dimen/radius_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="100dp"
+                        android:gravity="top"
+                        android:textColor="@color/textPrimary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Category -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/text_caption"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
+                <Spinner
+                    android:id="@+id/spinner_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:background="@drawable/bg_input_modern" />
+
+                <!-- Subcategory -->
+                <Spinner
+                    android:id="@+id/spinner_sub_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:background="@drawable/bg_input_modern"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/spacing_md" />
+
+                <!-- Site Address -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:hint="Site Address"
+                    app:boxCornerRadiusTopStart="@dimen/radius_md"
+                    app:boxCornerRadiusTopEnd="@dimen/radius_md"
+                    app:boxCornerRadiusBottomStart="@dimen/radius_md"
+                    app:boxCornerRadiusBottomEnd="@dimen/radius_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_site_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textPrimary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Site Location -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:hint="City"
+                    app:boxCornerRadiusTopStart="@dimen/radius_md"
+                    app:boxCornerRadiusTopEnd="@dimen/radius_md"
+                    app:boxCornerRadiusBottomStart="@dimen/radius_md"
+                    app:boxCornerRadiusBottomEnd="@dimen/radius_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_site_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textPrimary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Duration -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:hint="Duration (Months)"
+                    app:boxCornerRadiusTopStart="@dimen/radius_md"
+                    app:boxCornerRadiusTopEnd="@dimen/radius_md"
+                    app:boxCornerRadiusBottomStart="@dimen/radius_md"
+                    app:boxCornerRadiusBottomEnd="@dimen/radius_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/textPrimary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Submit -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:text="Post Job"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_subtitle"
+                    android:fontFamily="@font/open_sans_bold"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:cornerRadius="@dimen/radius_full"
+                    android:layout_marginTop="@dimen/spacing_xl" />
+
+                <!-- Progress -->
+                <ProgressBar
+                    android:id="@+id/progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"/>
-
-            </HorizontalScrollView>
-
-            <!-- Description -->
-            <EditText
-                android:id="@+id/et_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Description"
-                android:minHeight="100dp"
-                android:gravity="top"
-                android:background="@drawable/edittext_border"
-                android:padding="10dp"
-                android:textColorHint="@color/gray"/>
-
-            <!-- Worker/Contractor Selection Dropdown -->
-            <Spinner
-                android:id="@+id/spinner_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:padding="10dp"/>
-
-            <!-- Subcategory Dropdown (Initially Hidden) -->
-            <Spinner
-                android:id="@+id/spinner_sub_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:padding="10dp"
-                android:visibility="gone"/>
-
-
-            <!-- Site Address -->
-            <EditText
-                android:id="@+id/et_site_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Site Address"
-                android:background="@drawable/edittext_border"
-                android:padding="10dp"
-                android:textColorHint="@color/gray"/>
-
-            <!-- Site Location (City) -->
-            <EditText
-                android:id="@+id/et_site_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter City"
-                android:background="@drawable/edittext_border"
-                android:padding="10dp"
-                android:textColorHint="@color/gray"/>
-
-            <!-- Duration (Months) -->
-            <EditText
-                android:id="@+id/et_duration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Duration (Months)"
-                android:inputType="number"
-                android:background="@drawable/edittext_border"
-                android:padding="10dp"
-                android:textColorHint="@color/gray"/>
-
-            <!-- Submit Button -->
-            <Button
-                android:id="@+id/btn_submit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:backgroundTint="@color/orange"
-                android:textColor="@color/white"
-                android:layout_marginTop="10dp"/>
-
-            <!-- Progress Indicator -->
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                android:indeterminate="true"
-                android:layout_marginTop="10dp"/>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:layout_marginTop="@dimen/spacing_md" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

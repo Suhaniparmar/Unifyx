@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Unifyx</string>
+    <string name="app_name" translatable="false">Unifyx</string>
+    <string name="default_web_client_id" translatable="false">809389810178-un0gpe6eel3m3jscmt09vpmf6evc310j.apps.googleusercontent.com</string>
     <string-array name="worker_categories">
         <item>Electrician</item>
         <item>Plumber</item>
@@ -32,5 +33,8 @@
         <item>Nadiad</item>
         <item>Bhuj</item>
     </string-array>
+    <string name="back">Back</string>
+    <string name="worker_avatar">Worker Avatar</string>
+    <string name="recommended">Recommended</string>
 
 </resources>

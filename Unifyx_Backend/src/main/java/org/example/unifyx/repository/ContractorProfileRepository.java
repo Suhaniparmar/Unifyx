@@ -7,11 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ContractorProfileRepository extends JpaRepository<ContractorProfile, Integer> {
-    // You can add custom queries here if necessary
-    @Query("SELECT c FROM ContractorProfile c WHERE LOWER(c.siteAddress) = LOWER(:siteAddress)")
-    List<ContractorProfile> findBySiteAddressIgnoreCase(@Param("siteAddress") String siteAddress);
+    Optional<ContractorProfile> findTopByEmailIgnoreCaseOrderByContractorIdDesc(String email);
+
+    @Query("SELECT c FROM ContractorProfile c WHERE LOWER(c.address) = LOWER(:address)")
+    List<ContractorProfile> findByAddressIgnoreCase(@Param("address") String address);
 
 }

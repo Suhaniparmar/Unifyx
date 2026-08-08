@@ -8,6 +8,7 @@ import java.util.List;
 public class WorkerProfile implements Profile {
 
     private int workerId;
+    private String uid;
     private String name;
     private String email;
     private String phoneNo;
@@ -73,11 +74,20 @@ public class WorkerProfile implements Profile {
         this.workerId = workerId;
     }
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     @Override
     public String toString() {
         return "WorkerProfile{" +
                 "address='" + address + '\'' +
                 ", workerId=" + workerId +
+                ", uid='" + uid + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNo='" + phoneNo + '\'' +

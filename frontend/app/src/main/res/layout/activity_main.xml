@@ -5,58 +5,84 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/background"
     tools:context="com.example.unifyx.MainActivity">
 
+    <!-- Logo Area -->
     <View
         android:id="@+id/view"
-        android:layout_width="348dp"
-        android:layout_height="201dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="202dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
         android:background="@drawable/unifyx_logo"
-        app:layout_constraintBottom_toTopOf="@+id/signup_btn"
+        app:layout_constraintBottom_toTopOf="@+id/tagline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintWidth_percent="0.55" />
 
-    <Button
+    <!-- Tagline -->
+    <TextView
+        android:id="@+id/tagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your trusted marketplace for\nconstruction services"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_body"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginTop="@dimen/spacing_md"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/signup_btn" />
+
+    <!-- Sign Up Button -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signup_btn"
-        android:layout_width="238dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="478dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="189dp"
-        android:backgroundTint="@color/orange"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginBottom="@dimen/spacing_md"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Sign Up"
-        android:textColor="#000000"
-        android:textColorLink="#ECA74D"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Get Started"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_subtitle"
+        app:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="@dimen/radius_full"
+        app:elevation="@dimen/elevation_sm"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintWidth_percent="0.75" />
 
-    <Button
+    <!-- Login Button -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/login_btn"
-        android:layout_width="238dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="558dp"
-        android:layout_marginBottom="107dp"
-        android:backgroundTint="@color/orange"
+        style="@style/Unifyx.Button.Outline"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginBottom="@dimen/spacing_xxl"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Log in"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="I already have an account"
+        android:textSize="@dimen/text_body"
+        app:cornerRadius="@dimen/radius_full"
+        app:layout_constraintBottom_toTopOf="@id/versionText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintWidth_percent="0.75" />
+
+    <!-- Version Text -->
+    <TextView
+        android:id="@+id/versionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="v1.0"
+        android:textColor="@color/textHint"
+        android:textSize="@dimen/text_caption"
+        android:layout_marginBottom="@dimen/spacing_md"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

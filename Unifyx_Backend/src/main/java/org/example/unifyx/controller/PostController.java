@@ -5,7 +5,6 @@ import org.example.unifyx.Model.Users;
 import org.example.unifyx.repository.PostRepository;
 import org.example.unifyx.repository.UserRepository;
 import org.example.unifyx.service.PostService;
-import org.example.unifyx.cloudinary.CloudinaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,9 +49,17 @@ public class PostController {
         post.setDuration(duration);
         post.setUser(user);
 
-        // Pass post and images for processing
-        Post savedPost = postService.createPostWithImages(post, images, uid);
-        return ResponseEntity.ok(savedPost);
+        try {
+            Post savedPost = postService.createPostWithImages(post, images, uid);
+            return ResponseEntity.ok(savedPost);
+        } catch (IllegalStateException ex) {
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
+        } catch (RuntimeException ex) {
+            if (ex.getMessage() != null && ex.getMessage().contains("Failed to upload image to Cloudinary")) {
+                return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+            }
+            throw ex;
+        }
     }
 
 

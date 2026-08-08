@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, String> {
+public interface UserRepository extends JpaRepository<Users, Long> {
 
     @Query("SELECT u.role FROM Users u WHERE u.uid = :uid")
     String findRoleByUid(@Param("uid") String uid);
@@ -18,6 +18,10 @@ public interface UserRepository extends JpaRepository<Users, String> {
     Optional<Users> findByEmail(String email);
 
     Optional<Users> findByUid(String uid);
+
+    boolean existsByUid(String uid);
+
+    void deleteByUid(String uid);
 
     Users findUserByUid(String uid);
 }

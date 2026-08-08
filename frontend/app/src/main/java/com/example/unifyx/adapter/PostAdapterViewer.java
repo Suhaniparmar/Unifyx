@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,9 +22,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.target.Target;
 import com.example.unifyx.R;
 import com.example.unifyx.model.Post;
-import com.example.unifyx.worker.WorkerBid;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.unifyx.worker.SubmitQuoteActivity;
 
 import java.util.List;
 
@@ -107,17 +104,10 @@ public class PostAdapterViewer extends RecyclerView.Adapter<PostAdapterViewer.Po
             holder.postImage.setImageResource(R.drawable.placeholder);
 
         }
-        holder.itemView.setOnClickListener(v -> {
-            Log.d("PostAdapterViewer", "Sending postId: " + post.getPostId());
+        holder.sendQuoteButton.setOnClickListener(v -> openQuoteFlow(post));
 
-            SharedPreferences sharedPreferences2 = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-            String uid = sharedPreferences2.getString("uid", null);
-            Intent intent = new Intent(context, WorkerBid.class);
-            intent.putExtra("postId", post.getPostId());
-            intent.putExtra("senderId",uid);
-
-            context.startActivity(intent);
-        });
+        // Keep card tap behavior consistent with Send Quote CTA.
+        holder.itemView.setOnClickListener(v -> openQuoteFlow(post));
 
     }
 
@@ -126,10 +116,36 @@ public class PostAdapterViewer extends RecyclerView.Adapter<PostAdapterViewer.Po
         return postList.size();
     }
 
+    private void openQuoteFlow(Post post) {
+        int postId = post.getPostId();
+        if (postId <= 0) {
+            android.widget.Toast.makeText(context, "Invalid post. Please refresh and try again.", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        SharedPreferences prefs = context.getSharedPreferences("UnifyxPrefs", Context.MODE_PRIVATE);
+        int senderId = prefs.getInt("senderId", -1);
+        if (senderId <= 0) {
+            // Backward compatibility for older sessions.
+            senderId = prefs.getInt("workerId", -1);
+        }
+
+        if (senderId <= 0) {
+            android.widget.Toast.makeText(context, "Session expired. Please open profile once and try again.", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Log.d("PostAdapterViewer", "Opening quote screen with postId=" + postId + ", workerId=" + senderId);
+        Intent intent = new Intent(context, SubmitQuoteActivity.class);
+        intent.putExtra("postId", postId);
+        intent.putExtra("workerId", senderId);
+        context.startActivity(intent);
+    }
+
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         TextView title, description, location, duration;
         ImageView postImage;
-        Button BidNow;
+        Button sendQuoteButton;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -138,7 +154,7 @@ public class PostAdapterViewer extends RecyclerView.Adapter<PostAdapterViewer.Po
             description = itemView.findViewById(R.id.postDescription);
             location = itemView.findViewById(R.id.postLocation);
             duration = itemView.findViewById(R.id.postDuration);
-            BidNow = itemView.findViewById(R.id.btnBidNow);
+            sendQuoteButton = itemView.findViewById(R.id.btnBidNow);
         }
     }
     public void updateData(List<Post> newPostList) {

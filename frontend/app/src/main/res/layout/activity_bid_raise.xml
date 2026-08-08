@@ -5,18 +5,31 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/colorSurfaceVariant"
     tools:context="com.example.unifyx.worker.WorkerBid">
 
-    <!-- CardView for a clean UI -->
-    <androidx.cardview.widget.CardView
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="@dimen/icon_size_md"
+        android:layout_height="@dimen/icon_size_md"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:contentDescription="Back"
+        android:padding="@dimen/spacing_sm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_arrow" />
+
+    <!-- CardView -->
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="6dp"
-        android:layout_margin="20dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="@dimen/radius_md"
+        app:cardElevation="@dimen/elevation_md"
+        app:strokeColor="@color/colorOutlineVariant"
+        app:strokeWidth="1dp"
+        android:layout_margin="@dimen/spacing_lg"
+        app:layout_constraintTop_toBottomOf="@id/btn_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -25,15 +38,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="@dimen/spacing_lg">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Raise a Bid"
-                android:textSize="22sp"
+                android:textSize="@dimen/text_headline"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textPrimary"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"/>
 
@@ -41,49 +54,56 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:boxCornerRadiusTopStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusBottomEnd="12dp">
+                android:layout_marginTop="@dimen/spacing_md"
+                app:boxCornerRadiusTopStart="@dimen/radius_md"
+                app:boxCornerRadiusTopEnd="@dimen/radius_md"
+                app:boxCornerRadiusBottomStart="@dimen/radius_md"
+                app:boxCornerRadiusBottomEnd="@dimen/radius_md"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amountInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Bid Amount"
-                    android:inputType="numberDecimal"/>
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/textPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Input for Duration -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:boxCornerRadiusTopStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusBottomEnd="12dp">
+                android:layout_marginTop="@dimen/spacing_md"
+                app:boxCornerRadiusTopStart="@dimen/radius_md"
+                app:boxCornerRadiusTopEnd="@dimen/radius_md"
+                app:boxCornerRadiusBottomStart="@dimen/radius_md"
+                app:boxCornerRadiusBottomEnd="@dimen/radius_md"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/durationInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Duration (e.g., 5 days)"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textColor="@color/textPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Submit Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submitBidButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/spacing_lg"
                 android:text="Submit Bid"
-                android:backgroundTint="@color/black"
-                android:textColor="@android:color/white"
-                app:cornerRadius="50dp"/>
+                android:textColor="@color/white"
+                android:fontFamily="@font/open_sans_bold"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="@dimen/radius_full"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

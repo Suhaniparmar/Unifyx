@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,10 +33,27 @@ public class PostBidsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (shouldRedirectToMatches()) {
+            Intent sourceIntent = getIntent();
+            Intent matchesIntent = new Intent(this, PostMatchesActivity.class);
+            matchesIntent.putExtra("postId", sourceIntent.getIntExtra("postId", -1));
+            startActivity(matchesIntent);
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_post_bids);
 
         recyclerView = findViewById(R.id.recyclerViewBids);
         progressBar = findViewById(R.id.progressBar);
+        findViewById(R.id.btn_back).setOnClickListener(v -> navigateBack());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                navigateBack();
+            }
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -51,6 +69,19 @@ public class PostBidsActivity extends AppCompatActivity {
         RetrofitClient retrofitClient = new RetrofitClient();
         apiService = retrofitClient.getRetrofit().create(ApiService.class);
         fetchBids();
+    }
+
+    private boolean shouldRedirectToMatches() {
+        return true;
+    }
+
+    private void navigateBack() {
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
+        startActivity(new Intent(this, owner_home.class));
+        finish();
     }
 
     private void fetchBids() {

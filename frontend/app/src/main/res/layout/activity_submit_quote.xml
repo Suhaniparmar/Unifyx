@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_md"
+    android:background="@color/colorSurfaceVariant">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/spacing_md">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="@dimen/icon_size_md"
+            android:layout_height="@dimen/icon_size_md"
+            android:src="@drawable/ic_back_arrow"
+            android:contentDescription="@string/back"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Submit Quote"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold"
+            android:textColor="@color/textPrimary"
+            android:layout_marginStart="@dimen/spacing_md" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Job Details Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Job Details"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginBottom="@dimen/spacing_sm" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorPrimaryContainer"
+                android:padding="@dimen/spacing_md"
+                android:layout_marginBottom="@dimen/spacing_md">
+
+                <TextView
+                    android:id="@+id/jobTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fix Kitchen Plumbing"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textPrimary"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
+                <TextView
+                    android:id="@+id/jobCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Plumbing"
+                    android:textSize="@dimen/text_caption"
+                    android:textColor="@color/textSecondary" />
+
+                <TextView
+                    android:id="@+id/jobLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📍 1.5 km away"
+                    android:textSize="@dimen/text_caption"
+                    android:textColor="@color/textSecondary"
+                    android:layout_marginTop="@dimen/spacing_xs" />
+            </LinearLayout>
+
+            <!-- Price Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Price Quote"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                android:textColor="@color/textPrimary"
+                android:layout_marginBottom="@dimen/spacing_sm" />
+
+            <EditText
+                android:id="@+id/priceInput"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:hint="₹ Enter your quote price"
+                android:inputType="numberDecimal"
+                android:padding="@dimen/spacing_md"
+                android:background="@drawable/rounded_edittext"
+                android:textColor="@color/textPrimary"
+                android:textColorHint="@color/textHint"
+                android:layout_marginBottom="@dimen/spacing_md" />
+
+            <!-- Estimated Time -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estimated Completion Time"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                android:textColor="@color/textPrimary"
+                android:layout_marginBottom="@dimen/spacing_sm" />
+
+            <EditText
+                android:id="@+id/timeInput"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:hint="e.g., 2 days, 1 week"
+                android:inputType="text"
+                android:padding="@dimen/spacing_md"
+                android:background="@drawable/rounded_edittext"
+                android:textColor="@color/textPrimary"
+                android:textColorHint="@color/textHint"
+                android:layout_marginBottom="@dimen/spacing_md" />
+
+            <!-- Message/Pitch -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cover Letter / Pitch"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                android:textColor="@color/textPrimary"
+                android:layout_marginBottom="@dimen/spacing_sm" />
+
+            <EditText
+                android:id="@+id/messageInput"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="Tell them about your experience, why you're the perfect fit..."
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:padding="@dimen/spacing_md"
+                android:background="@drawable/rounded_edittext"
+                android:textColor="@color/textPrimary"
+                android:textColorHint="@color/textHint"
+                android:layout_marginBottom="@dimen/spacing_lg" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Submit Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitQuoteBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="Submit Quote"
+        android:textSize="@dimen/text_subtitle"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="@font/open_sans_bold"
+        app:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="@dimen/radius_md" />
+
+</LinearLayout>

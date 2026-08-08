@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="26dp" />
+            <gradient
+                android:angle="300"
+                android:startColor="#26A69A"
+                android:endColor="#4FC3F7" />
+        </shape>
+    </item>
+
+    <item
+        android:left="14dp"
+        android:top="14dp"
+        android:right="14dp"
+        android:bottom="14dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="22dp" />
+            <solid android:color="#24FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- Center person head -->
+    <item
+        android:left="70dp"
+        android:top="34dp"
+        android:right="70dp"
+        android:bottom="108dp">
+        <shape android:shape="oval">
+            <solid android:color="#FFFFD8B4" />
+        </shape>
+    </item>
+
+    <!-- Hair -->
+    <item
+        android:left="66dp"
+        android:top="28dp"
+        android:right="66dp"
+        android:bottom="116dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <solid android:color="#FF5D4037" />
+        </shape>
+    </item>
+
+    <!-- Body -->
+    <item
+        android:left="56dp"
+        android:top="88dp"
+        android:right="56dp"
+        android:bottom="34dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" />
+            <solid android:color="#FFFFAB91" />
+        </shape>
+    </item>
+
+    <!-- Left helper person -->
+    <item
+        android:left="28dp"
+        android:top="62dp"
+        android:right="124dp"
+        android:bottom="52dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp" />
+            <solid android:color="#FFC5E1A5" />
+        </shape>
+    </item>
+
+    <!-- Right helper person -->
+    <item
+        android:left="124dp"
+        android:top="62dp"
+        android:right="28dp"
+        android:bottom="52dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp" />
+            <solid android:color="#FFFFE082" />
+        </shape>
+    </item>
+
+    <!-- Signup panel -->
+    <item
+        android:left="52dp"
+        android:top="130dp"
+        android:right="52dp"
+        android:bottom="22dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp" />
+            <solid android:color="#F2FFFFFF" />
+        </shape>
+    </item>
+
+</layer-list>
+

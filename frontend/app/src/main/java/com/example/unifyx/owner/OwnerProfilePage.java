@@ -1,11 +1,14 @@
 package com.example.unifyx.owner;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,8 +26,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class OwnerProfilePage extends AppCompatActivity {
     private TextView ownerName, ownerEmail, ownerPhone, ownerAddress;
@@ -44,6 +45,14 @@ public class OwnerProfilePage extends AppCompatActivity {
         ownerEmail = findViewById(R.id.userEmail);
         ownerPhone = findViewById(R.id.userPhone);
         ownerAddress = findViewById(R.id.userAddress);
+        findViewById(R.id.btn_back).setOnClickListener(v -> navigateBack());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                navigateBack();
+            }
+        });
+        clearProfileFields();
 
         // ✅ Setup RecyclerView
         recyclerView = findViewById(R.id.recyclerViewPosts);
@@ -71,24 +80,52 @@ public class OwnerProfilePage extends AppCompatActivity {
         // ✅ Retrieve logged-in email from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String ownerEmailStr = sharedPreferences.getString("email", null);
+        uid = sharedPreferences.getString("uid", null);
 
-        SharedPreferences sharedPreferences2 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        uid = sharedPreferences2.getString("uid", null);
-
-        if (ownerEmailStr != null && uid != null) {
-            Log.d("OwnerProfile", "Email from SharedPreferences: " + ownerEmailStr);
-            fetchOwnerProfile(ownerEmailStr);
-            fetchOwnerPosts(uid);
+        if (!TextUtils.isEmpty(uid) || !TextUtils.isEmpty(ownerEmailStr)) {
+            Log.d("OwnerProfile", "Identity from SharedPreferences: " + ownerEmailStr + ", uid=" + uid);
+            fetchOwnerProfile(uid, ownerEmailStr);
+            if (!TextUtils.isEmpty(uid)) {
+                fetchOwnerPosts(uid);
+            }
         } else {
-            Toast.makeText(this, "Error: User email not found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "User identity missing. Please login again.", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
-    private void fetchOwnerProfile(String email) {
+    private void fetchOwnerProfile(String uid, String email) {
+        if (!TextUtils.isEmpty(uid)) {
+            apiService.getOwnerProfileByUid(uid).enqueue(new Callback<OwnerProfile>() {
+                @Override
+                public void onResponse(Call<OwnerProfile> call, Response<OwnerProfile> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        bindOwnerProfile(response.body());
+                    } else if (!TextUtils.isEmpty(email)) {
+                        fetchOwnerProfileByEmail(email);
+                    } else {
+                        clearProfileFields();
+                        Toast.makeText(OwnerProfilePage.this, "Failed to fetch profile (" + response.code() + ")", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-        RetrofitClient retrofitClient = new RetrofitClient();
-        apiService = retrofitClient.getRetrofit().create(ApiService.class);
+                @Override
+                public void onFailure(Call<OwnerProfile> call, Throwable t) {
+                    if (!TextUtils.isEmpty(email)) {
+                        fetchOwnerProfileByEmail(email);
+                    } else {
+                        clearProfileFields();
+                        Toast.makeText(OwnerProfilePage.this, "Failed to load profile", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            return;
+        }
 
+        fetchOwnerProfileByEmail(email);
+    }
+
+    private void fetchOwnerProfileByEmail(String email) {
         Call<OwnerProfile> call = apiService.getOwnerProfile(email);
 
         call.enqueue(new Callback<OwnerProfile>() {
@@ -96,28 +133,33 @@ public class OwnerProfilePage extends AppCompatActivity {
             @Override
             public void onResponse(Call<OwnerProfile> call, Response<OwnerProfile> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    OwnerProfile owner = response.body();
-                    ownerName.setText(owner.getName());
-                    ownerEmail.setText(owner.getEmail());
-                    ownerPhone.setText(owner.getPhoneNo());
-                    ownerAddress.setText(owner.getAddress());
+                    bindOwnerProfile(response.body());
                 } else {
+                    clearProfileFields();
                     try {
-                        String errorResponse = response.errorBody().string();
-                        Log.e("OwnerProfile", "Response unsuccessful: " + errorResponse);
+                        String errorResponse = response.errorBody() != null ? response.errorBody().string() : "";
+                        Log.e("OwnerProfile", "Response unsuccessful: " + response.code() + " " + errorResponse);
                     } catch (Exception e) {
                         Log.e("OwnerProfile", "Error reading response", e);
                     }
-                    Toast.makeText(OwnerProfilePage.this, "Failed to fetch profile", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OwnerProfilePage.this, "Failed to fetch profile (" + response.code() + ")", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<OwnerProfile> call, Throwable t) {
+                clearProfileFields();
                 Log.e("OwnerProfile", "API call failed: " + t.getMessage());
                 Toast.makeText(OwnerProfilePage.this, "Failed to load profile", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void bindOwnerProfile(OwnerProfile owner) {
+        ownerName.setText(owner.getName());
+        ownerEmail.setText(owner.getEmail());
+        ownerPhone.setText(owner.getPhoneNo());
+        ownerAddress.setText(owner.getAddress());
     }
     private void fetchOwnerPosts(String uid) {
         Log.d("OwnerProfile", "Fetching posts for UID: " + uid);
@@ -136,8 +178,8 @@ public class OwnerProfilePage extends AppCompatActivity {
                     }
                 } else {
                     try {
-                        String errorResponse = response.errorBody().string();
-                        Log.e("OwnerProfile", "Error fetching posts: " + errorResponse);
+                        String errorResponse = response.errorBody() != null ? response.errorBody().string() : "";
+                        Log.e("OwnerProfile", "Error fetching posts: " + response.code() + " " + errorResponse);
                     } catch (Exception e) {
                         Log.e("OwnerProfile", "Error reading response", e);
                     }
@@ -152,4 +194,21 @@ public class OwnerProfilePage extends AppCompatActivity {
             }
         });
     }
+
+    private void clearProfileFields() {
+        ownerName.setText("-");
+        ownerEmail.setText("-");
+        ownerPhone.setText("-");
+        ownerAddress.setText("-");
+    }
+
+    private void navigateBack() {
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
+        startActivity(new Intent(this, owner_home.class));
+        finish();
+    }
+
 }

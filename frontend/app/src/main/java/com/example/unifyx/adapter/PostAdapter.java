@@ -24,7 +24,7 @@ import com.example.unifyx.R;
 import com.example.unifyx.model.Post;
 import com.example.unifyx.network.ApiService;
 import com.example.unifyx.network.RetrofitClient;
-import com.example.unifyx.owner.PostBidsActivity;
+import com.example.unifyx.owner.PostMatchesActivity;
 
 import java.util.List;
 
@@ -94,10 +94,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             deletePost(post.getPostId(), position);
         });
 
-        // Show Bids button
-        holder.showBidsButton.setText("Show Bids");
+        // View Matches button (Smart Hiring System)
+        holder.showBidsButton.setText("View Matches");
         holder.showBidsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(context, PostBidsActivity.class);
+            Intent intent = new Intent(context, PostMatchesActivity.class);
             intent.putExtra("postId", post.getPostId());
             context.startActivity(intent);
         });
@@ -126,8 +126,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     private void deletePost(int postId, int position) {
-        RetrofitClient retrofitClient = new RetrofitClient();
-        apiService = retrofitClient.getRetrofit().create(ApiService.class);
+        apiService = RetrofitClient.getInstance().getApiService();
         Call<Void> call = apiService.deletePost(postId);
 
         call.enqueue(new Callback<Void>() {

@@ -10,9 +10,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.unifyx.R;
+import com.example.unifyx.choose_role;
 import com.example.unifyx.model.WorkerProfile;
 import com.example.unifyx.network.ApiService;
 import com.example.unifyx.network.RetrofitClient;
@@ -32,6 +34,8 @@ public class worker_info extends AppCompatActivity {
     private Spinner locationSpinner;
     private Button submitButton;
     private LinearLayout categoryCheckboxGroup;
+    private String identityEmail;
+    private String identityUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,21 @@ public class worker_info extends AppCompatActivity {
         locationSpinner = findViewById(R.id.location_spinner);
         submitButton = findViewById(R.id.submit_button);
         categoryCheckboxGroup = findViewById(R.id.category_checkbox_group);
+        findViewById(R.id.btn_back).setOnClickListener(v -> navigateBack());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                navigateBack();
+            }
+        });
+
+        SharedPreferences userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        identityEmail = userPrefs.getString("email", null);
+        identityUid = userPrefs.getString("uid", null);
+        if (identityEmail != null && !identityEmail.trim().isEmpty()) {
+            emailEditText.setText(identityEmail);
+            emailEditText.setEnabled(false);
+        }
 
         // Populate Worker Categories with Checkboxes
         addWorkerCategories();
@@ -55,7 +74,9 @@ public class worker_info extends AppCompatActivity {
         // Handle Submit Button Click
         submitButton.setOnClickListener(v -> {
             String name = nameEditText.getText().toString().trim();
-            String email = emailEditText.getText().toString().trim();
+            String email = (identityEmail != null && !identityEmail.trim().isEmpty())
+                    ? identityEmail.trim()
+                    : emailEditText.getText().toString().trim();
             String contact = contactEditText.getText().toString().trim();
             String location = locationSpinner.getSelectedItem().toString();
             List<String> selectedCategories = getSelectedCategories();
@@ -71,6 +92,7 @@ public class worker_info extends AppCompatActivity {
             }
 
             WorkerProfile worker = new WorkerProfile(name, email, contact, location, selectedCategories);
+            worker.setUid(identityUid);
             Log.d("WorkerInfo", "Sending Data: " + worker.toString()); // ✅ Debugging log
 
             apiService.addWorker(worker).enqueue(new Callback<WorkerProfile>() {
@@ -134,4 +156,14 @@ public class worker_info extends AppCompatActivity {
         }
         return selectedCategories;
     }
+
+    private void navigateBack() {
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
+        startActivity(new Intent(this, choose_role.class));
+        finish();
+    }
+
 }

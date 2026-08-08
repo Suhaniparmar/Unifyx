@@ -12,7 +12,20 @@
           "package_name": "com.example.unifyx"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "530538772048-pesb2qp1oddttl34pp04uijtm65cng8v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.unifyx",
+            "certificate_hash": "e9807983849e7819fb5f3d825a8bf9fd1516062f"
+          }
+        },
+        {
+          "client_id": "530538772048-17v0kl7uofvjc7d0jj9gj6lhj5sf67q2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBzvlvDXxGwsHEdarnLF1fnTutlfi1_VMc"
@@ -20,7 +33,41 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530538772048-17v0kl7uofvjc7d0jj9gj6lhj5sf67q2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530538772048:android:55e0a13e00ceafdbd84355",
+        "android_client_info": {
+          "package_name": "com.unifyx.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530538772048-17v0kl7uofvjc7d0jj9gj6lhj5sf67q2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzvlvDXxGwsHEdarnLF1fnTutlfi1_VMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530538772048-17v0kl7uofvjc7d0jj9gj6lhj5sf67q2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

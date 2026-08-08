@@ -6,6 +6,8 @@ import org.example.unifyx.repository.OwnerProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OwnerProfileService {
 
@@ -14,11 +16,13 @@ public class OwnerProfileService {
 
 
     public OwnerProfile addOwnerProfile(OwnerProfile ownerProfile) {
+        Optional<OwnerProfile> existing = ownerProfileRepository
+                .findTopByEmailIgnoreCaseOrderByOwnerIdDesc(ownerProfile.getEmail());
+        existing.ifPresent(profile -> ownerProfile.setOwnerId(profile.getOwnerId()));
         return ownerProfileRepository.save(ownerProfile);
     }
 
     public OwnerProfile getOwnerByEmail(String email) {
-        return ownerProfileRepository.findByEmail(email);
-
+        return ownerProfileRepository.findTopByEmailIgnoreCaseOrderByOwnerIdDesc(email).orElse(null);
     }
 }

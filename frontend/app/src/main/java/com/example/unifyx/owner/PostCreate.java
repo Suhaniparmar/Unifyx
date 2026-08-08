@@ -73,6 +73,7 @@ public class PostCreate extends AppCompatActivity {
         etDuration = findViewById(R.id.et_duration);
         btnSelectImages = findViewById(R.id.btn_select_images);
         btnSubmit = findViewById(R.id.btn_submit);
+        ImageView backButton = findViewById(R.id.btn_back);
         spinnerCategory = findViewById(R.id.spinner_category);
         spinnerSubCategory = findViewById(R.id.spinner_sub_category);
         imagePreviewContainer = findViewById(R.id.image_preview_container);
@@ -80,6 +81,7 @@ public class PostCreate extends AppCompatActivity {
 
         progressBar.setVisibility(View.GONE);
 
+        backButton.setOnClickListener(v -> finish());
         btnSelectImages.setOnClickListener(v -> selectImages());
         setupCategoryDropdown();
         btnSubmit.setOnClickListener(v -> submitPost());
@@ -191,12 +193,34 @@ public class PostCreate extends AppCompatActivity {
     private void createPostWithImages() {
         SharedPreferences sharedPreferences2 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         this.uid = sharedPreferences2.getString("uid", null);
-        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), etDescription.getText().toString());
+
+        String descriptionText = etDescription.getText().toString().trim();
+        String siteAddressText = etSiteAddress.getText().toString().trim();
+        String siteLocationText = etSiteLocation.getText().toString().trim();
+        String durationText = etDuration.getText().toString().trim();
+
+        if (uid == null || uid.trim().isEmpty()) {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(this, "Session expired. Please login again.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (descriptionText.isEmpty() || siteAddressText.isEmpty() || siteLocationText.isEmpty() || durationText.isEmpty()) {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (selectedCategory == null || selectedCategory.trim().isEmpty()) {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(this, "Please select a category", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), descriptionText);
         RequestBody workerCategory = RequestBody.create(MediaType.parse("text/plain"), selectedCategory);
-        RequestBody siteAddress = RequestBody.create(MediaType.parse("text/plain"), etSiteAddress.getText().toString());
-        RequestBody siteLocation = RequestBody.create(MediaType.parse("text/plain"), etSiteLocation.getText().toString());
-        RequestBody duration = RequestBody.create(MediaType.parse("text/plain"), etDuration.getText().toString());
-        RequestBody uid = RequestBody.create(MediaType.parse("text/plain"), this.uid); // Replace with actual owner UID
+        RequestBody siteAddress = RequestBody.create(MediaType.parse("text/plain"), siteAddressText);
+        RequestBody siteLocation = RequestBody.create(MediaType.parse("text/plain"), siteLocationText);
+        RequestBody duration = RequestBody.create(MediaType.parse("text/plain"), durationText);
+        RequestBody uid = RequestBody.create(MediaType.parse("text/plain"), this.uid.trim()); // Non-null after validation
 
 
         List<MultipartBody.Part> imageParts = new ArrayList<>();
@@ -220,6 +244,7 @@ public class PostCreate extends AppCompatActivity {
                             Toast.makeText(PostCreate.this, "Post uploaded successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PostCreate.this, OwnerProfilePage.class);
                             startActivity(intent);
+                            finish();
                         } else {
                             try {
                                 Log.e(TAG, "Post upload failed: " + response.errorBody().string());

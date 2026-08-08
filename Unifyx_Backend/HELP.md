@@ -21,6 +21,22 @@ The following guides illustrate how to use some features concretely:
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 
+### Environment Variables
+
+Set Cloudinary credentials in your shell before starting the backend:
+
+```zsh
+export CLOUDINARY_CLOUD_NAME="your_cloud_name"
+export CLOUDINARY_API_KEY="your_api_key"
+export CLOUDINARY_API_SECRET="your_api_secret"
+```
+
+Run backend in the same terminal session after setting these values:
+
+```zsh
+mvn spring-boot:run
+```
+
 ### Maven Parent overrides
 
 Due to Maven's design, elements are inherited from the parent POM to the project POM.

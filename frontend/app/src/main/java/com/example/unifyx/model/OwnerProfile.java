@@ -10,6 +10,8 @@ public class OwnerProfile {
 
     private int ownerId;
 
+    private String uid;
+
     private String name;
     private String email;
     private String phoneNo;
@@ -81,5 +83,13 @@ public class OwnerProfile {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_sm"
+    android:layout_marginVertical="@dimen/spacing_xs"
+    app:cardCornerRadius="@dimen/radius_md"
+    app:cardElevation="@dimen/elevation_sm"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_md">
+
+        <!-- Worker Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacing_sm">
+
+            <!-- Avatar -->
+            <ImageView
+                android:id="@+id/workerAvatar"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:src="@drawable/ic_profile_placeholder"
+                android:contentDescription="@string/worker_avatar"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_avatar_circle" />
+
+            <!-- Name + Trust -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/spacing_md">
+
+                <TextView
+                    android:id="@+id/workerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textSize="@dimen/text_subtitle"
+                    android:textStyle="bold"
+                    android:textColor="@color/textPrimary" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/spacing_xxs">
+
+                    <RatingBar
+                        android:id="@+id/workerRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="4.5"
+                        android:isIndicator="true"
+                        android:scaleX="0.6"
+                        android:scaleY="0.6"
+                        android:progressTint="@color/colorPrimary"
+                        android:transformPivotX="0dp" />
+
+                    <TextView
+                        android:id="@+id/trustScoreLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8.2/10"
+                        android:textSize="@dimen/text_caption"
+                        android:textColor="@color/textSecondary" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Distance -->
+            <TextView
+                android:id="@+id/distanceBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2.5 km"
+                android:textSize="@dimen/text_caption"
+                android:textStyle="bold"
+                android:background="@drawable/badge_background_light"
+                android:paddingHorizontal="@dimen/spacing_sm"
+                android:paddingVertical="@dimen/spacing_xxs"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <!-- Quote Info Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/colorSurfaceVariant"
+            android:padding="@dimen/spacing_sm">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quote:"
+                android:textSize="@dimen/text_caption"
+                android:textColor="@color/textSecondary" />
+
+            <TextView
+                android:id="@+id/quotePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹2,500"
+                android:textSize="@dimen/text_subtitle"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginStart="@dimen/spacing_xs" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/estimatedTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⏱ 2 days"
+                android:textSize="@dimen/text_caption"
+                android:textColor="@color/textSecondary" />
+        </LinearLayout>
+
+        <!-- Match Indicator -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/spacing_sm">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_xs"
+                android:layout_height="@dimen/icon_size_xs"
+                android:src="@drawable/ic_check_circle"
+                android:contentDescription="@string/recommended" />
+
+            <TextView
+                android:id="@+id/reasonTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓ 95% match · High completion rate"
+                android:textSize="@dimen/text_caption"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:textColor="@color/statusSuccess" />
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            android:layout_marginVertical="@dimen/spacing_sm" />
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/viewProfileBtn"
+                style="@style/Unifyx.Button.SmallOutline"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height_sm"
+                android:layout_weight="1"
+                android:text="View Profile"
+                android:textColor="@color/colorPrimary"
+                app:strokeColor="@color/colorPrimary"
+                app:cornerRadius="@dimen/radius_full"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/hireBtn"
+                style="@style/Unifyx.Button.Small"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height_sm"
+                android:layout_weight="1"
+                android:text="Hire Now"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="@dimen/radius_full"
+                android:layout_marginStart="@dimen/spacing_xs" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

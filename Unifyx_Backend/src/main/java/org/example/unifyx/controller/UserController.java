@@ -1,7 +1,6 @@
 package org.example.unifyx.controller;
 
 import org.example.unifyx.Model.Users;
-import org.example.unifyx.repository.UserRepository;
 import org.example.unifyx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +16,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository; // Only used when necessary
-
     // ✅ Fetch all users
     @GetMapping
     public List<Users> getAllUsers() {
@@ -31,9 +27,12 @@ public class UserController {
         if (user.getUid() == null || user.getEmail() == null || user.getRole()==null) {
             return ResponseEntity.badRequest().body("UID, Email and role are required");
         }
-
-        userRepository.save(user);
-        return ResponseEntity.ok("User registered successfully");
+        try {
+            userService.createUser(user);
+            return ResponseEntity.ok("User registered successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     // ✅ Fetch a user by UID
@@ -68,8 +67,12 @@ public class UserController {
         if (user.getEmail() == null || user.getEmail().isEmpty()) {
             return ResponseEntity.badRequest().body("Email cannot be null or empty");
         }
-        userService.createUser(user);
-        return ResponseEntity.ok("User registered successfully");
+        try {
+            userService.createUser(user);
+            return ResponseEntity.ok("User registered successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     // ✅ Update user details

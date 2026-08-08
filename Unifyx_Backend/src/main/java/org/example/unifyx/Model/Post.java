@@ -27,6 +27,9 @@ public class Post{
     @Column(name = "site_location")
     private String siteLocation;
 
+    private Double latitude;
+    private Double longitude;
+
     private String duration;
     private String status;
 
@@ -62,4 +65,10 @@ public class Post{
 
     public List<String> getPhotos() { return photos; }
     public void setPhotos(List<String> photos) { this.photos = photos; }
+
+    public Double getLatitude() { return latitude; }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
+
+    public Double getLongitude() { return longitude; }
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
 }

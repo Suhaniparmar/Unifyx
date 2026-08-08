@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_sm"
+    android:layout_marginVertical="@dimen/spacing_xs"
+    app:cardCornerRadius="@dimen/radius_md"
+    app:cardElevation="@dimen/elevation_sm"
+    app:strokeWidth="0dp"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_md">
+
+        <!-- Job Title -->
+        <TextView
+            android:id="@+id/jobTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Electrician"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_subtitle"
+            android:textColor="@color/textPrimary" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/jobDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:text="Job description"
+            android:textSize="@dimen/text_body"
+            android:textColor="@color/textSecondary"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+        <!-- Location -->
+        <TextView
+            android:id="@+id/jobLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="📍 Location"
+            android:textSize="@dimen/text_caption"
+            android:textColor="@color/textSecondary" />
+
+        <!-- Price + Duration + Status Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:gravity="center_vertical"
+            android:background="@color/colorSurfaceVariant"
+            android:padding="@dimen/spacing_sm">
+
+            <TextView
+                android:id="@+id/quotePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹0"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_subtitle" />
+
+            <TextView
+                android:id="@+id/estimatedTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:text="2 days"
+                android:textSize="@dimen/text_caption"
+                android:textColor="@color/textSecondary" />
+
+            <TextView
+                android:id="@+id/statusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PENDING"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_overline"
+                android:textColor="@color/white"
+                android:paddingHorizontal="@dimen/spacing_sm"
+                android:paddingVertical="@dimen/spacing_xxs"
+                android:background="@drawable/badge_pending" />
+        </LinearLayout>
+
+        <!-- Quote Message -->
+        <TextView
+            android:id="@+id/quoteMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="Quote message"
+            android:textSize="@dimen/text_body"
+            android:textColor="@color/textPrimary" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

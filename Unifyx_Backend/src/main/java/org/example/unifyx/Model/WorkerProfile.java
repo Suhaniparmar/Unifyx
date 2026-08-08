@@ -17,12 +17,18 @@ public class WorkerProfile {
     private String email;
     private String phoneNo;
     private String address;
+    private Double latitude;
+    private Double longitude;
+    private Boolean isVerified;
+    private Double hourlyRate;
 
     @ElementCollection
     @CollectionTable(name = "worker_categories", joinColumns = @JoinColumn(name = "worker_id"))
     @Column(name = "category")
     private List<String> categories;// Multiple categories a worker can choose
 
+    @OneToOne(mappedBy = "worker", cascade = CascadeType.ALL, orphanRemoval = true)
+    private TrustScore trustScore; // Trust score entity
 
     @OneToMany(mappedBy = "worker", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Portfolio> portfolios;
@@ -84,5 +90,20 @@ public class WorkerProfile {
 
     public List<String> getCategories() { return categories; }
     public void setCategories(List<String> categories) { this.categories = categories; }
+
+    public Double getLatitude() { return latitude; }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
+
+    public Double getLongitude() { return longitude; }
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
+
+    public Boolean getIsVerified() { return isVerified; }
+    public void setIsVerified(Boolean isVerified) { this.isVerified = isVerified; }
+
+    public Double getHourlyRate() { return hourlyRate; }
+    public void setHourlyRate(Double hourlyRate) { this.hourlyRate = hourlyRate; }
+
+    public TrustScore getTrustScore() { return trustScore; }
+    public void setTrustScore(TrustScore trustScore) { this.trustScore = trustScore; }
 }
 

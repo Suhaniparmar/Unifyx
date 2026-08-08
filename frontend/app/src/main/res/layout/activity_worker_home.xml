@@ -1,70 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4EFE5"
+    android:fitsSystemWindows="true"
     tools:context="com.example.unifyx.worker.WorkerHome">
 
-    <!-- Navbar -->
-    <View
-        android:id="@+id/navbar"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:background="#B3E5BC6F"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Menu Icon -->
-    <ImageView
-        android:id="@+id/menu"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Menu Icon"
-        app:layout_constraintBottom_toBottomOf="@id/navbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/navbar"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/menu_logo" />
-
-    <!-- Search Icon (Replaced with SearchView) -->
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="72dp"
-        android:queryHint="Search by Location"
-        app:layout_constraintBottom_toBottomOf="@id/navbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/menu"
-        app:layout_constraintTop_toTopOf="@id/navbar" />
-
-    <!-- Profile Icon -->
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/navbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/navbar"
-        app:srcCompat="@drawable/profile_logo" />
-
-    <!-- RecyclerView to display posts -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/workerPostRecyclerView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/navbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <!-- Top App Bar -->
+        <View
+            android:id="@+id/navbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/navbar_height"
+            android:background="@drawable/navbar_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Menu Icon -->
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="@dimen/icon_size_md"
+            android:layout_height="@dimen/icon_size_md"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:contentDescription="Menu Icon"
+            android:padding="@dimen/spacing_sm"
+            app:layout_constraintBottom_toBottomOf="@id/navbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/navbar"
+            app:srcCompat="@drawable/menu_logo" />
+
+        <!-- App Title in Navbar -->
+        <TextView
+            android:id="@+id/navTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unifyx"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold"
+            android:fontFamily="@font/open_sans_bold"
+            app:layout_constraintBottom_toBottomOf="@id/navbar"
+            app:layout_constraintStart_toEndOf="@id/menu"
+            app:layout_constraintTop_toTopOf="@id/navbar"
+            android:layout_marginStart="@dimen/spacing_sm" />
+
+        <!-- Profile Icon -->
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/icon_size_md"
+            android:layout_height="@dimen/icon_size_md"
+            android:layout_marginEnd="@dimen/spacing_md"
+            android:contentDescription="Profile"
+            android:padding="@dimen/spacing_sm"
+            app:layout_constraintBottom_toBottomOf="@id/navbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/navbar"
+            app:srcCompat="@drawable/profile_logo" />
+
+        <!-- Search Icon -->
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="@dimen/icon_size_md"
+            android:layout_height="@dimen/icon_size_md"
+            android:layout_marginEnd="@dimen/spacing_sm"
+            android:contentDescription="Search"
+            android:padding="@dimen/spacing_sm"
+            app:layout_constraintBottom_toBottomOf="@id/navbar"
+            app:layout_constraintEnd_toStartOf="@id/imageView2"
+            app:layout_constraintTop_toTopOf="@id/navbar"
+            app:srcCompat="@drawable/search_logo" />
+
+        <!-- Section Title -->
+        <TextView
+            android:id="@+id/sectionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:text="Find Work"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_headline"
+            android:textStyle="bold"
+            android:fontFamily="@font/open_sans_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/navbar" />
+
+        <TextView
+            android:id="@+id/sectionSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:text="Browse available jobs near you"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_body"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sectionTitle" />
+
+        <!-- Posts RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/spacing_sm"
+            android:paddingBottom="@dimen/spacing_sm"
+            app:layout_constraintBottom_toTopOf="@id/bottomNav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sectionSubtitle" />
+
+        <!-- Empty State -->
+        <LinearLayout
+            android:id="@+id/emptyState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/sectionSubtitle"
+            app:layout_constraintBottom_toTopOf="@id/bottomNav"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔍"
+                android:textSize="48sp" />
+
+            <TextView
+                style="@style/Unifyx.EmptyState.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No jobs available"
+                android:layout_marginTop="@dimen/spacing_md" />
+
+            <TextView
+                style="@style/Unifyx.EmptyState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check back later for new\njob opportunities"
+                android:layout_marginTop="@dimen/spacing_sm" />
+        </LinearLayout>
+
+        <!-- Bottom Navigation -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBottomNav"
+            app:menu="@menu/bottom_nav_worker"
+            app:itemIconTint="@color/colorBottomNavInactive"
+            app:itemTextColor="@color/colorBottomNavInactive"
+            app:labelVisibilityMode="labeled"
+            android:elevation="@dimen/elevation_lg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:itemIconTint="@color/textPrimary"
+        app:itemTextColor="@color/textPrimary"
+        app:menu="@menu/owner_drawer_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,12 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="orange">#ECA74D</color>
-    <color name="gray">#808080</color>
-    <color name="red">#FF4D4D</color>
-    <color name="light_gray">#D3D3D3</color>
-    <color name="blue">#2196F3</color>
 
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Brand Colors (Legacy Aliases — Preserved)           -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <color name="orange">#E8923A</color>
+    <color name="black">#1A1A1A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#888888</color>
+    <color name="red">#FF4D4D</color>
+    <color name="blue">#2196F3</color>
+    <color name="purple">#6C63FF</color>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Material3 Color Roles — Deep Amber + Indigo         -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <color name="colorPrimary">#E8923A</color>
+    <color name="colorPrimaryDark">#CC7A2F</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimaryContainer">#FFF0DB</color>
+    <color name="colorOnPrimaryContainer">#3E2723</color>
+
+    <color name="colorSecondary">#6C63FF</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorSecondaryContainer">#E8E5FF</color>
+    <color name="colorOnSecondaryContainer">#1A1170</color>
+
+    <color name="colorTertiary">#00BFA5</color>
+    <color name="colorOnTertiary">#FFFFFF</color>
+    <color name="colorTertiaryContainer">#D4FFF5</color>
+
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#1A1A1A</color>
+    <color name="colorSurfaceVariant">#F5F5F5</color>
+    <color name="colorOnSurfaceVariant">#5D5347</color>
+    <color name="colorSurfaceContainer">#EEEEEE</color>
+    <color name="colorSurfaceContainerHigh">#E0E0E0</color>
+
+    <color name="colorOutline">#C9C4BC</color>
+    <color name="colorOutlineVariant">#E0DCD6</color>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Background & Navbar                                 -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <color name="background">#FAFAFA</color>
+    <color name="navbarColor">#E8923A</color>
+    <color name="navbarColorTranslucent">#B3E8923A</color>
+    <color name="colorGradientStart">#E8923A</color>
+    <color name="colorGradientEnd">#F2B866</color>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Bottom Navigation                                   -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <color name="colorBottomNav">#FFFFFF</color>
+    <color name="colorBottomNavActive">#E8923A</color>
+    <color name="colorBottomNavInactive">#9E9E9E</color>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Text Hierarchy                                      -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <color name="textPrimary">#1A1A1A</color>
+    <color name="textSecondary">#616161</color>
+    <color name="textHint">#9E9E9E</color>
+    <color name="textOnDark">#FFFFFF</color>
+    <color name="textOnPrimary">#FFFFFF</color>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Status Colors                                       -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <color name="success">#2E7D32</color>
+    <color name="statusSuccess">#2E7D32</color>
+    <color name="successLight">#E8F5E9</color>
+    <color name="warning">#F57C00</color>
+    <color name="warningLight">#FFF3E0</color>
+    <color name="error">#D32F2F</color>
+    <color name="errorLight">#FFEBEE</color>
+    <color name="statusError">#D32F2F</color>
+    <color name="info">#1976D2</color>
+    <color name="infoLight">#E3F2FD</color>
+
+    <color name="colorErrorContainer">#FFEBEE</color>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Component-Specific                                  -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <color name="cardStroke">#E0DCD6</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="inputStroke">#C9C4BC</color>
+    <color name="inputStrokeFocused">#E8923A</color>
+    <color name="inputBackground">#FAFAFA</color>
+    <color name="inputBackgroundFilled">#F5F5F5</color>
+    <color name="badgePending">#F57C00</color>
+    <color name="badgeAccepted">#2E7D32</color>
+    <color name="badgeRejected">#D32F2F</color>
+    <color name="shimmer">#E0E0E0</color>
+    <color name="ripple">#1AE8923A</color>
+
+    <!-- Role Card Tints -->
+    <color name="ownerCardTint">#FFF5EC</color>
+    <color name="workerCardTint">#EDF0FF</color>
+    <color name="contractorCardTint">#E8F5E9</color>
+
+    <!-- Legacy compatibility aliases -->
+    <color name="light_gray">#F5F5F5</color>
+    <color name="purple_500">#6C63FF</color>
 
 </resources>

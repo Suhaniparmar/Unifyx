@@ -30,15 +30,27 @@ public class UserService {
 
 
     public Users createUser(Users user) {
-        if (user.getEmail() == null || user.getEmail().isEmpty()) {
+        if (user.getUid() == null || user.getUid().isBlank()) {
+            throw new IllegalArgumentException("UID cannot be null or empty");
+        }
+        if (user.getEmail() == null || user.getEmail().isBlank()) {
             throw new IllegalArgumentException("Email cannot be null or empty");
+        }
+        if (user.getRole() == null || user.getRole().isBlank()) {
+            throw new IllegalArgumentException("Role cannot be null or empty");
+        }
+        if (userRepository.existsByUid(user.getUid())) {
+            throw new IllegalArgumentException("UID already exists");
+        }
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email already exists");
         }
         return userRepository.save(user);
     }
 
     @Transactional
     public Users updateUser(String uid, Users userDetails) {
-        return userRepository.findById(uid).map(user -> {
+        return userRepository.findByUid(uid).map(user -> {
             user.setEmail(userDetails.getEmail());
             user.setRole(userDetails.getRole());
             return userRepository.save(user);
@@ -46,12 +58,14 @@ public class UserService {
     }
 
     public void deleteUser(String uid) {
-        userRepository.deleteById(uid);
+        Users user = userRepository.findByUid(uid)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        userRepository.delete(user);
     }
 
 
     public Users getUserById(String uid) {
-        Optional<Users> user = userRepository.findById(uid);
+        Optional<Users> user = userRepository.findByUid(uid);
         return user.orElse(null);
     }
 }

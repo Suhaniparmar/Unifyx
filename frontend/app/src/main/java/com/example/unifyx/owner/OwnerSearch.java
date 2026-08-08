@@ -1,11 +1,12 @@
 package com.example.unifyx.owner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,13 @@ public class OwnerSearch extends AppCompatActivity {
         spinnerLocation = findViewById(R.id.spinnerLocation);
         btnApplyFilters = findViewById(R.id.btnApplyFilters);
         recyclerViewProfiles = findViewById(R.id.recyclerViewProfiles);
+        findViewById(R.id.btn_back).setOnClickListener(v -> navigateBack());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                navigateBack();
+            }
+        });
 
         recyclerViewProfiles.setLayoutManager(new LinearLayoutManager(this));
 
@@ -93,6 +101,15 @@ public class OwnerSearch extends AppCompatActivity {
                 Log.e("API Error", "Failed to fetch profiles", t);
             }
         });
+    }
+
+    private void navigateBack() {
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
+        startActivity(new Intent(this, owner_home.class));
+        finish();
     }
 
 }

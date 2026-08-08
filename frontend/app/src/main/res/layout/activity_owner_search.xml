@@ -6,19 +6,33 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/colorSurfaceVariant"
     tools:context="com.example.unifyx.MainActivity">
 
-    <!-- Floating Search Bar -->
-    <androidx.cardview.widget.CardView
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="@dimen/icon_size_md"
+        android:layout_height="@dimen/icon_size_md"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:contentDescription="Back"
+        android:padding="@dimen/spacing_sm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_arrow" />
+
+    <!-- Search Bar -->
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardsearchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:elevation="6dp"
-        android:radius="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_md"
+        app:cardCornerRadius="@dimen/radius_md"
+        app:cardElevation="@dimen/elevation_md"
+        app:strokeColor="@color/colorOutlineVariant"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -28,18 +42,20 @@
             android:layout_height="wrap_content"
             android:queryHint="Search by name..."
             android:iconifiedByDefault="false"
-            android:background="@android:color/white"/>
-    </androidx.cardview.widget.CardView>
+            android:background="@color/colorSurface"/>
+    </com.google.android.material.card.MaterialCardView>
 
-    <!-- Filters Section (Inside a CardView) -->
-    <androidx.cardview.widget.CardView
+    <!-- Filters Section -->
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardFilters"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="16dp"
-        android:elevation="4dp"
-        android:radius="16dp"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_marginHorizontal="@dimen/spacing_md"
+        app:cardCornerRadius="@dimen/radius_md"
+        app:cardElevation="@dimen/elevation_md"
+        app:strokeColor="@color/colorOutlineVariant"
+        app:strokeWidth="1dp"
         app:layout_constraintTop_toBottomOf="@id/cardsearchView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -47,51 +63,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="@dimen/spacing_md"
             android:orientation="vertical">
-
-<!--            &lt;!&ndash; Worker/Contractor Dropdown &ndash;&gt;-->
-<!--            <Spinner-->
-<!--                android:id="@+id/spinnerCategory"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/spinner_background"/>-->
-
-<!--            &lt;!&ndash; Sub-Category Dropdown &ndash;&gt;-->
-<!--            <Spinner-->
-<!--                android:id="@+id/spinnerSubCategory"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:background="@drawable/spinner_background"/>-->
 
             <!-- Location Dropdown -->
             <Spinner
                 android:id="@+id/spinnerLocation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/spacing_sm"
                 android:background="@drawable/spinner_background"/>
 
             <!-- Apply Filters Button -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnApplyFilters"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/spacing_md"
                 android:text="Apply Filters"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_subtitle"
                 android:textColor="@color/white"
-                android:background="@drawable/btn_background"/>
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="@dimen/radius_md"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <!-- RecyclerView for Displaying Profiles -->
+    <!-- Results RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProfiles"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="8dp"
+        android:padding="@dimen/spacing_sm"
         android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@id/cardFilters"
         app:layout_constraintBottom_toBottomOf="parent"

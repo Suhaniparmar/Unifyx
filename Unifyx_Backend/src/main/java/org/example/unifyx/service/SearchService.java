@@ -28,7 +28,7 @@ public class SearchService {
     }
 
     public List<ContractorProfile> getContractorsByLocation(String location) {
-        return contractorProfileRepository.findBySiteAddressIgnoreCase(location);
+        return contractorProfileRepository.findByAddressIgnoreCase(location);
     }
 
 

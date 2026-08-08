@@ -6,9 +6,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
+    private static RetrofitClient instance;
     private static Retrofit retrofit;
+
     public RetrofitClient(){
         initializerRetrofit();
+    }
+
+    public static synchronized RetrofitClient getInstance() {
+        if (instance == null) {
+            instance = new RetrofitClient();
+        }
+        return instance;
     }
 
     private void initializerRetrofit(){
@@ -19,5 +28,9 @@ public class RetrofitClient {
 
     public Retrofit getRetrofit(){
         return retrofit;
+    }
+
+    public ApiService getApiService() {
+        return retrofit.create(ApiService.class);
     }
 }

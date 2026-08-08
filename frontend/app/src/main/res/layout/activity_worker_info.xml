@@ -5,123 +5,193 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background"
+        android:paddingBottom="@dimen/spacing_xl"
         tools:context="com.example.unifyx.MainActivity">
 
-        <!-- Username Field -->
-        <EditText
-            android:id="@+id/name"
+        <!-- Top Accent -->
+        <View
+            android:id="@+id/topAccent"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Full Name"
-            android:drawableStart="@drawable/ic_user"
-            android:padding="12dp"
-            android:background="@drawable/rounded_edittext"
-            android:layout_marginTop="120dp"
+            android:layout_height="140dp"
+            android:background="@drawable/bg_gradient_primary"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.8" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Email Field -->
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:drawableStart="@drawable/email_icon"
-            android:padding="12dp"
-            android:background="@drawable/rounded_edittext"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/name"
+        <!-- Back Button -->
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/icon_size_md"
+            android:layout_height="@dimen/icon_size_md"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:contentDescription="Back"
+            android:padding="@dimen/spacing_sm"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.8" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_arrow"
+            app:tint="@color/white" />
 
-        <!-- Contact Number Field -->
-        <EditText
-            android:id="@+id/contact"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Contact Number"
-            android:drawableStart="@drawable/contact"
-            android:padding="12dp"
-            android:background="@drawable/rounded_edittext"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.8" />
-
-        <!-- Select Location Spinner -->
-        <Spinner
-            android:id="@+id/location_spinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_edittext"
-            android:entries="@array/gujarat_cities"
-            app:layout_constraintTop_toBottomOf="@id/contact"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.8" />
-
-        <!-- Worker Category Selection Label -->
+        <!-- Title -->
         <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Worker Categories"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/location_spinner"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Checkbox Group -->
-
-        <!-- Submit Button -->
-        <LinearLayout
-            android:id="@+id/category_checkbox_group"
+            android:id="@+id/page_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
-
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/orange"
-            android:padding="12dp"
-            android:text="Submit"
+            android:text="Worker Profile"
+            android:textSize="@dimen/text_headline"
+            android:textStyle="bold"
             android:textColor="@color/white"
-            android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@id/category_checkbox_group"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.6" />
-
-        <!-- Progress Bar (Remains Fixed) -->
-        <ProgressBar
-            android:id="@+id/progress_bar1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/submit_button"
+            android:fontFamily="@font/open_sans_bold"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginStart="@dimen/spacing_lg"
+            app:layout_constraintTop_toBottomOf="@id/btn_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Form Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/formCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-30dp"
+            app:cardCornerRadius="@dimen/radius_lg"
+            app:cardElevation="@dimen/elevation_lg"
+            app:strokeWidth="0dp"
+            app:layout_constraintTop_toBottomOf="@id/topAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.9">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <!-- Full Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Full Name"
+                    app:startIconDrawable="@drawable/ic_user"
+                    app:boxCornerRadiusTopStart="@dimen/radius_md"
+                    app:boxCornerRadiusTopEnd="@dimen/radius_md"
+                    app:boxCornerRadiusBottomStart="@dimen/radius_md"
+                    app:boxCornerRadiusBottomEnd="@dimen/radius_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textPrimary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Email -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:hint="Email"
+                    app:startIconDrawable="@drawable/email_icon"
+                    app:boxCornerRadiusTopStart="@dimen/radius_md"
+                    app:boxCornerRadiusTopEnd="@dimen/radius_md"
+                    app:boxCornerRadiusBottomStart="@dimen/radius_md"
+                    app:boxCornerRadiusBottomEnd="@dimen/radius_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/textPrimary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Contact -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:hint="Contact Number"
+                    app:startIconDrawable="@drawable/contact"
+                    app:boxCornerRadiusTopStart="@dimen/radius_md"
+                    app:boxCornerRadiusTopEnd="@dimen/radius_md"
+                    app:boxCornerRadiusBottomStart="@dimen/radius_md"
+                    app:boxCornerRadiusBottomEnd="@dimen/radius_md">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textColor="@color/textPrimary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Location -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="City"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/text_caption"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:layout_marginBottom="@dimen/spacing_xs" />
+
+                <Spinner
+                    android:id="@+id/location_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:background="@drawable/bg_input_modern"
+                    android:entries="@array/gujarat_cities" />
+
+                <!-- Category Selection -->
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Worker Categories"
+                    android:textSize="@dimen/text_subtitle"
+                    android:textColor="@color/textPrimary"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/spacing_lg" />
+
+                <LinearLayout
+                    android:id="@+id/category_checkbox_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:orientation="vertical" />
+
+                <!-- Submit -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/submit_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:text="Complete Setup"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_subtitle"
+                    android:fontFamily="@font/open_sans_bold"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:cornerRadius="@dimen/radius_full"
+                    android:layout_marginTop="@dimen/spacing_xl" />
+
+                <!-- Progress Bar -->
+                <ProgressBar
+                    android:id="@+id/progress_bar1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:visibility="gone"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

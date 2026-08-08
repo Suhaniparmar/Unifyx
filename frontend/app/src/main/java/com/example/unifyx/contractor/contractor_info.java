@@ -1,14 +1,17 @@
 package com.example.unifyx.contractor;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.unifyx.R;
+import com.example.unifyx.choose_role;
 import com.example.unifyx.model.ContractorProfile;
 import com.example.unifyx.model.OwnerProfile;
 import com.example.unifyx.network.ApiService;
@@ -27,6 +30,8 @@ public class contractor_info extends AppCompatActivity {
     private EditText nameEditText, emailEditText, contactEditText;
     private Spinner locationSpinner;
     private Button submitButton;
+    private String identityEmail;
+    private String identityUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,21 @@ public class contractor_info extends AppCompatActivity {
         contactEditText = findViewById(R.id.contact);
         locationSpinner = findViewById(R.id.location_spinner);
         submitButton = findViewById(R.id.submit_button);
+        findViewById(R.id.btn_back).setOnClickListener(v -> navigateBack());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                navigateBack();
+            }
+        });
+
+        SharedPreferences userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        identityEmail = userPrefs.getString("email", null);
+        identityUid = userPrefs.getString("uid", null);
+        if (identityEmail != null && !identityEmail.trim().isEmpty()) {
+            emailEditText.setText(identityEmail);
+            emailEditText.setEnabled(false);
+        }
 
 //        // Handle Spinner Selection
 //        locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -57,10 +77,17 @@ public class contractor_info extends AppCompatActivity {
 
         // Handle Submit Button Click
         submitButton.setOnClickListener(v -> {
-            String name = nameEditText.getText().toString();
-            String email = emailEditText.getText().toString();
-            String contact = contactEditText.getText().toString();
+            String name = nameEditText.getText().toString().trim();
+            String email = (identityEmail != null && !identityEmail.trim().isEmpty())
+                    ? identityEmail.trim()
+                    : emailEditText.getText().toString().trim();
+            String contact = contactEditText.getText().toString().trim();
             String location = locationSpinner.getSelectedItem().toString();
+
+            if (name.isEmpty() || email.isEmpty() || contact.isEmpty()) {
+                Toast.makeText(contractor_info.this, "All fields are required", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             ContractorProfile contractor = new ContractorProfile(name, email, contact, location, null);
             apiService.addContractor(contractor).enqueue(new Callback<ContractorProfile>() {
@@ -87,4 +114,14 @@ public class contractor_info extends AppCompatActivity {
 
 //
     }
+
+    private void navigateBack() {
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
+        startActivity(new Intent(this, choose_role.class));
+        finish();
+    }
+
 }
