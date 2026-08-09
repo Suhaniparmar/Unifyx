@@ -12,19 +12,43 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unifyx.R;
+import com.example.unifyx.model.Hire;
 import com.example.unifyx.model.Quote;
 import com.example.unifyx.owner.PostMatchesActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyQuoteAdapter extends RecyclerView.Adapter<MyQuoteAdapter.MyQuoteViewHolder> {
 
     private final Context context;
     private final List<Quote> quotes;
+    private List<Hire> hires = new ArrayList<>();
 
     public MyQuoteAdapter(Context context, List<Quote> quotes) {
         this.context = context;
         this.quotes = quotes;
+    }
+
+    // Read-only Hire status for this worker's own quotes. Rating/completion
+    // actions live on the owner's side (PostMatchesActivity/QuoteAdapter) —
+    // this only displays current state, matching the backend's ownerRating/
+    // ownerReview fields, which are not something the worker submits.
+    public void setHires(List<Hire> hires) {
+        this.hires = hires != null ? hires : new ArrayList<>();
+        notifyDataSetChanged();
+    }
+
+    private Hire findHireForQuote(Quote quote) {
+        if (quote.getPost() == null) {
+            return null;
+        }
+        for (Hire hire : hires) {
+            if (hire.getPost() != null && hire.getPost().getPostId() == quote.getPost().getPostId()) {
+                return hire;
+            }
+        }
+        return null;
     }
 
     @NonNull
@@ -52,6 +76,18 @@ public class MyQuoteAdapter extends RecyclerView.Adapter<MyQuoteAdapter.MyQuoteV
         holder.quoteMessage.setText(quote.getMessage() == null ? "" : quote.getMessage());
         holder.statusBadge.setText(quote.getStatus() == null ? "PENDING" : quote.getStatus());
 
+        Hire hire = findHireForQuote(quote);
+        if (hire != null) {
+            String status = hire.getStatus() == null ? "ACTIVE" : hire.getStatus();
+            String text = "COMPLETED".equals(status) && hire.getOwnerRating() != null
+                    ? "Hire: COMPLETED — Rated " + String.format("%.0f", hire.getOwnerRating()) + "/5"
+                    : "Hire: " + status;
+            holder.hireStatusText.setText(text);
+            holder.hireStatusText.setVisibility(View.VISIBLE);
+        } else {
+            holder.hireStatusText.setVisibility(View.GONE);
+        }
+
         holder.itemView.setOnClickListener(v -> {
             if (quote.getPostId() > 0) {
                 Intent intent = new Intent(context, PostMatchesActivity.class);
@@ -70,7 +106,7 @@ public class MyQuoteAdapter extends RecyclerView.Adapter<MyQuoteAdapter.MyQuoteV
     }
 
     static class MyQuoteViewHolder extends RecyclerView.ViewHolder {
-        TextView jobTitle, jobDescription, jobLocation, quotePrice, estimatedTime, statusBadge, quoteMessage;
+        TextView jobTitle, jobDescription, jobLocation, quotePrice, estimatedTime, statusBadge, quoteMessage, hireStatusText;
 
         MyQuoteViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +117,7 @@ public class MyQuoteAdapter extends RecyclerView.Adapter<MyQuoteAdapter.MyQuoteV
             estimatedTime = itemView.findViewById(R.id.estimatedTime);
             statusBadge = itemView.findViewById(R.id.statusBadge);
             quoteMessage = itemView.findViewById(R.id.quoteMessage);
+            hireStatusText = itemView.findViewById(R.id.hireStatusText);
         }
     }
 }

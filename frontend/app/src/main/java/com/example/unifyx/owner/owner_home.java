@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 
 import com.example.unifyx.login;
 import com.example.unifyx.network.RetrofitClient;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -43,6 +44,7 @@ public class owner_home extends AppCompatActivity {
         ImageView menuIcon = findViewById(R.id.menu);
         ImageView profileLogo = findViewById(R.id.imageView2); // Profile logo ID
         ImageView searchLogo = findViewById(R.id.imageView3);
+        ExtendedFloatingActionButton fab = findViewById(R.id.fab);
 
         menuIcon.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
         navView.setNavigationItemSelectedListener(item -> {
@@ -86,6 +88,11 @@ public class owner_home extends AppCompatActivity {
 
         searchLogo.setOnClickListener(v -> {
             Intent intent = new Intent(owner_home.this, OwnerSearch.class);
+            startActivity(intent);
+        });
+
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(owner_home.this, PostCreate.class);
             startActivity(intent);
         });
     }

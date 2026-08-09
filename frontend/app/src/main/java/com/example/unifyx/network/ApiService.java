@@ -197,7 +197,14 @@ public interface ApiService {
      */
     @GET("/hires/worker/{workerId}")
     Call<List<Hire>> getHiresForWorker(@Path("workerId") int workerId);
-    
+
+    /**
+     * Get active hires for a post
+     * GET /hires/post/{postId}/active
+     */
+    @GET("/hires/post/{postId}/active")
+    Call<List<Hire>> getActiveHiresForPost(@Path("postId") int postId);
+
     /**
      * Complete a hire
      * PUT /hires/{hireId}/complete

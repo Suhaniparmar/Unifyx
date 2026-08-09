@@ -99,5 +99,17 @@
             android:text="Quote message"
             android:textSize="@dimen/text_body"
             android:textColor="@color/textPrimary" />
+
+        <!-- Hire status (read-only; set only once this quote led to a Hire) -->
+        <TextView
+            android:id="@+id/hireStatusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="Hire: ACTIVE"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_caption"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

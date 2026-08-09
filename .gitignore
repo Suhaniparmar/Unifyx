@@ -1,1 +1,6 @@
 Unifyx_Backend/src/main/resources/firebase-service-account.json
+.DS_Store
+.idea/
+target/
+build/
+*.jar

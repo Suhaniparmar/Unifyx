@@ -1,18 +1,20 @@
 package org.example.unifyx.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "trust_scores")
 public class TrustScore {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "score_id")
     private int scoreId;
-    
+
     @OneToOne
     @JoinColumn(name = "worker_id", referencedColumnName = "worker_id", nullable = false)
+    @JsonIgnore
     private WorkerProfile worker;
     
     @Column(nullable = false)

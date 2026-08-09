@@ -8,9 +8,16 @@ public class Hire {
     
     @SerializedName("postId")
     private int postId;
-    
+
     @SerializedName("workerId")
     private int workerId;
+
+    // The backend actually nests post/worker details under "post"/"worker"
+    // (see PostController/HireController responses), not flat postId/workerId
+    // fields, so those two ints above are never populated by real API
+    // responses. Use getPost()/getWorker() instead.
+    @SerializedName("post")
+    private Post post;
     
     @SerializedName("agreedPrice")
     private Double agreedPrice;
@@ -48,6 +55,9 @@ public class Hire {
     
     public int getPostId() { return postId; }
     public void setPostId(int postId) { this.postId = postId; }
+
+    public Post getPost() { return post; }
+    public void setPost(Post post) { this.post = post; }
     
     public int getWorkerId() { return workerId; }
     public void setWorkerId(int workerId) { this.workerId = workerId; }

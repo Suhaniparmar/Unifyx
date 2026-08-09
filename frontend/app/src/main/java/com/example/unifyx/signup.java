@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import com.google.android.material.textfield.TextInputLayout;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -53,6 +54,7 @@ public class signup extends AppCompatActivity {
     private Button signup_btn, googleSignupBtn;
     private EditText mobile_et, otp_et;
     private TextView login_txt, info_txt;
+    private TextInputLayout otp_layout;
     private ApiService apiService;
     private GoogleSignInClient googleSignInClient;
     private ActivityResultLauncher<Intent> googleSignInLauncher;
@@ -84,6 +86,7 @@ public class signup extends AppCompatActivity {
         googleSignupBtn = findViewById(R.id.btn_google_signup);
         mobile_et = findViewById(R.id.et_mobile);
         otp_et = findViewById(R.id.et_password);
+        otp_layout = findViewById(R.id.otp_layout);
         login_txt = findViewById(R.id.tv_log_in);
         info_txt = findViewById(R.id.info_text);
         progressBar = findViewById(R.id.progress_bar);
@@ -190,7 +193,7 @@ public class signup extends AppCompatActivity {
                         signup.this.resendToken = token;
                         otpSent = true;
 
-                        otp_et.setVisibility(View.VISIBLE);
+                        otp_layout.setVisibility(View.VISIBLE);
                         info_txt.setText("OTP sent to " + phoneNumber);
                         signup_btn.setText("Verify OTP");
                         mobile_et.setEnabled(false);
@@ -427,7 +430,7 @@ public class signup extends AppCompatActivity {
         verificationId = null;
         resendToken = null;
         otp_et.setText("");
-        otp_et.setVisibility(View.GONE);
+        otp_layout.setVisibility(View.GONE);
         mobile_et.setEnabled(true);
         signup_btn.setText("Send OTP");
         info_txt.setText("");

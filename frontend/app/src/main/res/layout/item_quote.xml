@@ -171,5 +171,82 @@
                 app:cornerRadius="@dimen/radius_full"
                 android:layout_marginStart="@dimen/spacing_xs" />
         </LinearLayout>
+
+        <!-- Hire Lifecycle Section (shown only once a Hire exists for this quote) -->
+        <LinearLayout
+            android:id="@+id/hireSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/spacing_sm">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginBottom="@dimen/spacing_sm" />
+
+            <TextView
+                android:id="@+id/hireStatusText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hire: ACTIVE"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_caption"
+                android:textColor="@color/textSecondary"
+                android:layout_marginBottom="@dimen/spacing_sm" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/markCompleteBtn"
+                style="@style/Unifyx.Button.Small"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height_sm"
+                android:text="Mark Complete"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="@dimen/radius_full"
+                android:visibility="gone" />
+
+            <!-- Rating & Review (shown once the Hire is COMPLETED and not yet rated) -->
+            <LinearLayout
+                android:id="@+id/ratingSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <RatingBar
+                    android:id="@+id/ratingInput"
+                    style="?android:attr/ratingBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:rating="0"
+                    android:progressTint="@color/colorPrimary"
+                    android:layout_marginBottom="@dimen/spacing_sm" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reviewInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Add a review (optional)"
+                    android:textSize="@dimen/text_body"
+                    android:background="@drawable/bg_input_modern"
+                    android:padding="@dimen/spacing_sm"
+                    android:layout_marginBottom="@dimen/spacing_sm" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/submitRatingBtn"
+                    style="@style/Unifyx.Button.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height_sm"
+                    android:text="Submit Rating"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:cornerRadius="@dimen/radius_full" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

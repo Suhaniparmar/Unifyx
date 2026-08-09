@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unifyx.R;
 import com.example.unifyx.adapter.MyQuoteAdapter;
 import com.example.unifyx.model.ContractorProfile;
+import com.example.unifyx.model.Hire;
 import com.example.unifyx.model.Quote;
 import com.example.unifyx.model.WorkerProfile;
 import com.example.unifyx.network.RetrofitClient;
@@ -87,6 +88,7 @@ public class MyQuotesActivity extends AppCompatActivity {
                 }
                 int workerId = response.body().getWorkerId();
                 RetrofitClient.getInstance().getApiService().getAllQuotesForWorker(workerId).enqueue(new QuoteListCallback());
+                loadWorkerHires(workerId);
             }
 
             @Override
@@ -111,6 +113,25 @@ public class MyQuotesActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ContractorProfile> call, Throwable t) {
                 Toast.makeText(MyQuotesActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // Read-only Hire status for the worker's own quotes. Not called for the
+    // contractor path: Hire currently has no contractor relation at all
+    // (backend Hire entity only supports WorkerProfile).
+    private void loadWorkerHires(int workerId) {
+        RetrofitClient.getInstance().getApiService().getHiresForWorker(workerId).enqueue(new Callback<List<Hire>>() {
+            @Override
+            public void onResponse(Call<List<Hire>> call, Response<List<Hire>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    adapter.setHires(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Hire>> call, Throwable t) {
+                // Non-blocking; quote list still works without hire state.
             }
         });
     }
